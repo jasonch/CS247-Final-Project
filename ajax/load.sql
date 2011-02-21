@@ -1,0 +1,1 @@
+INSERT INTO users VALUES ("seanw4", 0, "Sean", "Woolfolk", NULL, NULL); 
