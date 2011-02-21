@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><title>C&Eacute;L</title>
+<link rel='stylesheet' type='text/css' href='css/index.css'/>
+<script type='text/javascript' src='js/globals.js'></script>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+
+<script type='text/javascript' src='js/jquery.js'></script>
+<script type='text/javascript' src='js/format.js'></script>
+<script type='text/javascript' src='js/actions.js'></script>
+
+<script type='text/javascript'> 
+  $('document').ready(
+    function(){
+      // set random default task
+      var defaults = ["using facebook", "saying 'like'", "cussing", "watching TV series", "eating fries", "drinking coffee", "having caffeine"];
+      document.getElementById('resolution').value = (defaults[Math.floor(Math.random()*defaults.length)]);
+      loadCurrentPage ();
+      setInterval (loadCurrentPage, 300);
+      
+    });
+</script>
+</head>
+
+<body>
+      <div id="fb-root"></div>
+      <script type='text/javascript' src='js/fb_inc.js'></script>
+
+  <div class='header'>
+    <div class='logo'>
+      <a href='#'><img src='images/cel_logo.png' width='220px'/></a>
+    </div>
+    <div class='topbar'>
+      I want to  stop
+      <br/><input type='text' value='' id='resolution' onclick='clearText(this)'></input> 
+      for <select id='days'>
+        <option value='1'>1 day</option>
+        <option value='2'>2 days</option>
+        <option value='3'>3 days</option>
+        <option value='4'>4 days</option>
+        <option value='5'>5 days</option>
+        <option value='6'>6 days</option>
+        <option value='7'>7 days</option>
+      </select>
+      <input type='button' value='Start!' onclick='startResolution();'></input>
+    </div><!-- end topbar -->
+  </div><!-- end header -->
+  <div class='wrapper'>
+    <div id='content'>&nbsp;</div><!-- end content -->
+    <span id='sidebar'>
+      <div class='nav_link'><a href='#' onclick='changeContent("");'>Home</a></div>
+      <div class='nav_link'><a href='#loc=my' onclick='changeContent("my");'>My C&Eacute;L</a></div>
+      <div class='nav_link'><a href='#loc=hof' onclick='changeContent("hof");'>Hall of Fame</a></div>
+      <div class='nav_link'><fb:login-button autologoutlink='true' background='white' length='short' size='small'></fb:login-button></div>
+    </span>
+  </div><!-- end wrapper -->
+</body>
+</html>
