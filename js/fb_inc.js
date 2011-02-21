@@ -36,9 +36,14 @@
        fbLoadUserInfo(EMPTY_FUNC);
      } else {
         window.USER_INFO = {};
+        //window.location.href = APP_LOC; 
      }
   }
 
+  function fbLogoutEvent () {
+    window.USER_INFO = {};
+    window.location.href = APP_LOC;
+  }
 
   FB.init({ 
     appId: APP_ID, cookie:true, 
@@ -46,3 +51,4 @@
   });
   FB.getLoginStatus(fbLoginStatus);
   FB.Event.subscribe('auth.statusChange', fbLoginStatus);
+  FB.Event.subscribe('auth.logout', fbLogoutEvent);
