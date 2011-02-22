@@ -34,9 +34,7 @@
       		$challenge->message = $row["status"];
       		$received[] = $challenge;
     	}
-    	$toReturn[] = $sent;
-    	$toReturn[] = $recieved;
-   		echo json_encode($toReturn);
+   		echo json_encode({sent=>$sent, received =>$received});
    	} catch (PDOException $e) {
    		echo $e;
    	}
