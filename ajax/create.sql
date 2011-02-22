@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS challenges;
 CREATE TABLE challenges (
-	"challenge_id" INTEGER (32) NOT NULL,
+	"challenge_id" INTEGER (32),
 	"from_user" INTEGER (32) NOT NULL,
 	"to_user" INTEGER (32) NOT NULL,
 	"challenge" TEXT (256) NOT NULL,
