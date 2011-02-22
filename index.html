@@ -10,16 +10,15 @@
 <script type='text/javascript' src='js/jquery.js'></script>
 <script type='text/javascript' src='js/format.js'></script>
 <script type='text/javascript' src='js/actions.js'></script>
+<script type='text/javascript' src='js/module_friends.js'></script>
+<script type='text/javascript' src='js/module_myinfo.js'></script>
 
 <script type='text/javascript'> 
   $('document').ready(
     function(){
-      // set random default task
       var defaults = ["using facebook", "saying 'like'", "cussing", "watching TV series", "eating fries", "drinking coffee", "having caffeine"];
-      document.getElementById('resolution').value = (defaults[Math.floor(Math.random()*defaults.length)]);
       loadCurrentPage ();
-      setInterval (loadCurrentPage, 300);
-      
+      //setInterval (loadCurrentPage, 300);
     });
 </script>
 </head>
@@ -32,29 +31,20 @@
     <div class='logo'>
       <a href='#'><img src='images/cel_logo.png' width='220px'/></a>
     </div>
-    <div class='topbar'>
-      I want to  stop
-      <br/><input type='text' value='' id='resolution' onclick='clearText(this)'></input> 
-      for <select id='days'>
-        <option value='1'>1 day</option>
-        <option value='2'>2 days</option>
-        <option value='3'>3 days</option>
-        <option value='4'>4 ays</option>
-        <option value='5'>5 days</option>
-        <option value='6'>6 days</option>
-        <option value='7'>7 days</option>
-      </select>
-      <input type='button' value='Start!' onclick='startResolution();'></input>
-    </div><!-- end topbar -->
+    <div class='nav_links'>
+      <fb:login-button autologoutlink='true' size='medium'/>   
+    </div>
   </div><!-- end header -->
+
   <div class='wrapper'>
-    <div id='content'>&nbsp;</div><!-- end content -->
-    <span id='sidebar'>
-      <div class='nav_link'><a href='#' onclick='changeContent("");'>Home</a></div>
-      <div class='nav_link'><a href='#loc=my' onclick='changeContent("my");'>My C&Eacute;L</a></div>
-      <div class='nav_link'><a href='#loc=hof' onclick='changeContent("hof");'>Hall of Fame</a></div>
-      <div class='nav_link'><fb:login-button autologoutlink='true' background='white' length='short' size='small'></fb:login-button></div>
-    </span>
+    <div class='left-side'>
+      <div id='block-friends'>&nbsp;</div>
+    </div><!-- end left-side -->
+
+    <div class='right-side'>
+      <div id='block-my-info'>&nbsp;</div>
+      <div id='block-my-cel'>&nbsp;</div>
+    </div><!-- end right-side -->
   </div><!-- end wrapper -->
 </body>
 </html>

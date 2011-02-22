@@ -57,48 +57,16 @@ function addToContent (htmlText) {
 function changeContent (page) {
   CUR_PAGE = page;
   switch (page) {
-    case "my":
-      getMyCEL ();
-      break;
-    case "hof":
-      getHoF ();
-      break;
     default:
-      getHome ();
+      fbRequireLogin(load_friends);
+      fbRequireLogin(load_myinfo);
   }
 
 }
 
-function getMyCEL () {
-  fbRequireLogin (function () {
-    $.ajax ({
-      type: "GET",
-      url: AJAX_DIR + "getUserResolutions.php",
-      data: "user_id="+USER_INFO.id,
-      success: function (text) {
-        $('#content').html (formatMyCEL(text));
-      }
-    });
-  });
-}
-
-function getHoF () {
-  $.ajax ({ 
-    type: "GET",
-    url: AJAX_DIR + "getHighestPlayers.php",
-    data: "num=10&user_id=" + USER_INFO.id?USER_INFO.id:"",
-    success: function (text) {
-      $('#content').html (text);
-    }
-  });
-}
-
-function getHome () {
-  $('#content').html("");
-}
-
 function loadCurrentPage () {
   var params = getArgs ();
+  console.log (params);
   if (params["loc"] == undefined)
     params["loc"] == "";
 
