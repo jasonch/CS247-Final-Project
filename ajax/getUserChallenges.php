@@ -3,15 +3,15 @@
     include ('./connect.php');
     
     $user_id = $_GET['user_id'];
-    $challengesSentQuery = "SELECT (*) FROM challenges WHERE from_id = '".$user_id."'";
-    $challengesRecievedQuery = "SELECT (*) FROM challenges WHERE to_id = '".$user_id."'";
+    $challengesSentQuery = "SELECT * FROM challenges WHERE from_user = '".$user_id."'";
+    $challengesRecievedQuery = "SELECT * FROM challenges WHERE to_user = '".$user_id."'";
 
 	try {
 		$challengesSent = $db->query ($challengesSentQuery);
 		$challengesRecieved = $db->query ($challengesRecievedQuery);
 		$toReturn = array();
 		$sent = array();
-		$recieved = array();
+		$received = array();
     	foreach ($challengesSent as $row) {
     		$challenge = new stdClass;
       		$challenge->from_user = $row["from_user"];
@@ -34,7 +34,7 @@
       		$challenge->message = $row["status"];
       		$received[] = $challenge;
     	}
-   		echo json_encode({sent=>$sent, received =>$received});
+   		echo json_encode((object)array('sent'=>$sent, 'received' =>$received));
    	} catch (PDOException $e) {
    		echo $e;
    	}
