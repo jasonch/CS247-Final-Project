@@ -23,58 +23,57 @@ body {
   font-size: 2em;
   border: 0px;
 }
-.topbar {
-  padding: 20px 0 0 250px;
-  line-height: 30px;
-}
-.topbar input {
-  height: 20px;
-}
 
 .wrapper {
   width: 1000px;
-  height: 1000px;
+  height: 800px;
   background: #ffffff;
 }
-
-#stream {
-  height: 300px;
-  overflow: hidden;
+.nav_links {
+  padding: 55px 0 0 250px;
 }
-
-#content {
-  width:  800px;
-  height: 1000px;
-  float: left;
-}
-#sidebar {
-  width: 200px;
-  height: 1000px;
-}
-#sidebar .nav_link {
-  margin: 0 0 30px 0;
-}
-.nav_link a {
-  padding: 2px;
+.nav_links a {
   text-decoration: none;
   color: #3399cc;
 }
-.nav_link a:hover {
+.nav_links a:hover {
   color: white;
   background: #3399cc;
 }
-.resolution {
-  background-image: url('images/textbox.jpg');
-  background-repeat: none;
-  width: 700px;
-  height: 100px;
+
+.left-side {
+  float: left;
+}
+.right-side {
+  float: left;
 }
 
-.cel {
-  margin: 0 0 10px 15px;
-  font-size: 1em;
-  
+#block-friends {
+  width: 250px;
+  min-height: 500px;
+  margin: 20px;
+  border: 1px solid #000;
 }
-.cel .res_until {
-  font-size: 12px;
+
+.friend-item {
+  height: 60px;
+  padding: 0 5px;
+}
+
+#block-my-info {
+  margin: 20px;
+  width: 600px;
+  height: 120px;
+  border: 1px solid #000;
+}
+
+.user_pic {
+  float: left;
+}
+
+#block-my-cel {
+  margin: 20px;
+  width: 600px;
+  height: 120px;
+  border: 1px solid #000;
 }

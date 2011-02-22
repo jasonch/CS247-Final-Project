@@ -1,14 +1,14 @@
 
   function fbLoadUserInfo (callback) {
+
     FB.api ('/me', function (user) {
       $.ajax ({
         type: "POST",
         url: AJAX_DIR + "addUser.php",
-        data: "user_id="+user.id+"&first_name=" +user.first_name+ "&last_name=" + user.last_name,
+        data: "user_id=" + user.id + "&name=" +user.name, 
         success: function(data) {
           if (data == "true") {
             window.USER_INFO = user;
-            window.USER_INFO.addedRes = [];
             callback();
           }
         }
@@ -31,18 +31,21 @@
     }
   }
 
-  function fbLoginStatus(response) {
-     if(response.session) {
-       fbLoadUserInfo(EMPTY_FUNC);
-     } else {
-        window.USER_INFO = {};
-        //window.location.href = APP_LOC; 
-     }
+  function fbLoginStatus (response) {
+    if (response.session) {
+      fbLoginEvent ();
+    } else {
+      fbLogoutEvent ();
+    }
+  }
+
+  function fbLoginEvent () {
+    fbLoadUserInfo (EMPTY_FUNC);
+    changeContent ("");
   }
 
   function fbLogoutEvent () {
     window.USER_INFO = {};
-    window.location.href = APP_LOC;
   }
 
   FB.init({ 
@@ -50,5 +53,5 @@
     status:true, xfbml:true 
   });
   FB.getLoginStatus(fbLoginStatus);
-  FB.Event.subscribe('auth.statusChange', fbLoginStatus);
+  FB.Event.subscribe('auth.login', fbLoginEvent);
   FB.Event.subscribe('auth.logout', fbLogoutEvent);
