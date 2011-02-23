@@ -4,24 +4,30 @@
 
 	$userId = $_POST["user_id"];
 	$name = $_POST["name"];
-	$bool = false;
-	$checkExistQuery = "SELECT COUNT(*) FROM users WHERE user_id = '".$userId."'";
+	$selectQuery = "SELECT user_id, name, points, message FROM users WHERE user_id = '".$userId."'";
 	$insertQuery = "INSERT INTO users ('user_id', 'name') VALUES ('".$userId."','".$name."')";
 	try {
-		$exist = $db->query($checkExistQuery);
+		$exist = $db->query($selectQuery);
 		foreach($exist as $row) {
-			if ($row[0] == 1) {
-        echo "true";
-				exit();
-			}
-		}
+      echo json_encode ((object)$row);
+	  	exit();
+	  }
 	
-		$db->query($insertQuery);
-		$bool = "true";
+		$count = $db->exec($insertQuery);
+    if ($count == 0) {
+      echo "false";
+      exit ();
+    }
+
+		$exist = $db->query($selectQuery);
+		foreach($exist as $row) {
+      echo json_encode ((object)$row);
+	  	exit();
+	  }
+
 		echo json_encode($bool);
 	} catch (PDOException $e) {
-		echo json_encode($bool);
-		echo $e;
+		echo "false"; 
 	}
 	
 ?>

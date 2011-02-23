@@ -7,8 +7,8 @@
         url: AJAX_DIR + "addUser.php",
         data: "user_id=" + user.id + "&name=" +user.name, 
         success: function(data) {
-          if (data == "true") {
-            window.USER_INFO = user;
+          if (data != "false") {
+            window.USER_INFO = eval ('(' + data + ')');
             callback();
           }
         }
@@ -20,7 +20,6 @@
     if (USER_INFO.id ==  undefined) {
       FB.login (function (response) {
         if (response.session) {
-          console.log (response);
           fbLoadUserInfo (callback);
         } else {
           alert ("Login Required!");
@@ -40,8 +39,8 @@
   }
 
   function fbLoginEvent () {
-    fbLoadUserInfo (EMPTY_FUNC);
-    changeContent ("");
+    fbLoadUserInfo (
+      function () { changeContent ("my"); } );
   }
 
   function fbLogoutEvent () {

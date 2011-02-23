@@ -18,7 +18,7 @@
     function(){
       var defaults = ["using facebook", "saying 'like'", "cussing", "watching TV series", "eating fries", "drinking coffee", "having caffeine"];
       loadCurrentPage ();
-      //setInterval (loadCurrentPage, 300);
+      setInterval (loadCurrentPage, 300);
     });
 </script>
 </head>
@@ -37,6 +37,7 @@
   </div><!-- end header -->
 
   <div class='wrapper'>
+    <div id='system-message'></div>
     <div class='left-side'>
       <div id='block-friends'>&nbsp;</div>
     </div><!-- end left-side -->

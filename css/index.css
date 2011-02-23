@@ -63,7 +63,7 @@ body {
 #block-my-info {
   margin: 20px;
   width: 600px;
-  height: 120px;
+  min-height: 220px;
   border: 1px solid #000;
 }
 
