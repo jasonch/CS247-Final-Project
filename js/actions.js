@@ -23,8 +23,9 @@ function changeContent (page) {
   switch (page) {
     case "my":
       fbRequireLogin(function () {
-        load_friends();
         load_myinfo ();
+        setTimeout (load_mycel, 500);
+        setTimeout (load_friends, 1000);
       });
       break;
     default:
