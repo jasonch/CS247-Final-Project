@@ -1,8 +1,8 @@
 <?php
 	
-	$friendName = $_POST["fname"];
-	$fromUserId = $_POST["from"];
-	$toUserId = $_POST["to"];
+	$friendName = $_GET["fname"];
+	$fromUserId = $_GET["from"];
+	$toUserId = $_GET["to"];
 ?>
 
 	<form name ="challengeFreind" action = "addChallenge.php" method = "post">	
