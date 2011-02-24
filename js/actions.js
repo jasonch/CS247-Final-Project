@@ -11,17 +11,6 @@ function getArgs () {
     return vars;
 }
 
-function startResolution () {
-  var resolution = jQuery.trim($('#resolution').val());
-  var days = $('#days').val();
-
-  if (resolution == "") return;
-
-  fbRequireLogin (function () {
-    addResolution (resolution, days);
-  });
-}
-
 function clearText (el) {
   if (!el.no_clear_text) {
     el.no_clear_text = true;
@@ -29,44 +18,35 @@ function clearText (el) {
   }
 }
 
-function addResolution (resolution, day) {
-  $.ajax ({
-    type: "POST",
-    url: AJAX_DIR + "addResolution.php",
-    data: "user_id=" +USER_INFO.id+ "&resolution=" + resolution + "&day=" + day,
-    success: function (text) {
-      var intVal = parseInt (text);
-      switch (intVal) {
-        case -1:
-          alert("You have already added this goal! You can do it!");
-          break;
-        default:
-          if ($.inArray (intVal, USER_INFO.addedRes) == -1) {
-            USER_INFO.addedRes.push (parseInt(text));
-            addToContent(formatResolution (USER_INFO.name, resolution, day));
-          }
-      }
-    }
-  });
-}
-
-function addToContent (htmlText) {
-  $('#content').html (htmlText +$('#content').html());
-}
-
 function changeContent (page) {
   CUR_PAGE = page;
   switch (page) {
+    case "my":
+      fbRequireLogin(function () {
+        load_friends();
+        load_myinfo ();
+      });
+      break;
     default:
-      fbRequireLogin(load_friends);
-      fbRequireLogin(load_myinfo);
   }
 
 }
 
+function updateStatus (el) {
+  $.ajax ({
+    type: "POST",
+    url: AJAX_DIR + "updateStatus.php",
+    data: "user_id="+ USER_INFO.user_id + "&status=" + el.value,
+    success: function () {
+      $('#system-message').html ("Status successully updated.");
+      setTimeout (function (){
+        $('#system-message').html("");
+      }, 3000);}
+  });
+}
+
 function loadCurrentPage () {
   var params = getArgs ();
-  console.log (params);
   if (params["loc"] == undefined)
     params["loc"] == "";
 
