@@ -23,7 +23,7 @@ function formatMyCel (challenges) {
       "<div class=user_challenges>" +
       "id='user-challenge'" +
       "<dl>
-	  "<dt> + challenges[i].challenge + </dt>"+
+	  "<dt>" + challenges[i].challenge + "</dt>"+
 	  "<dd>Number of days left for " + challenge[i].to_User +" to complete challenge" +
 	  " = " +numDaysLeft+ "</dd>" +
 	  "<dd>What's at stake: $" + challenge[i].stake+ "</dd>"+
