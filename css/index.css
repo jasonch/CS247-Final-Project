@@ -62,6 +62,9 @@ body {
   height: 70px;
   padding: 0 5px;
 }
+.focused {
+  background: #CCFFCC;
+}
 
 #block-my-info {
   margin: 20px;
