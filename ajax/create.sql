@@ -4,7 +4,7 @@ CREATE TABLE challenges (
 	"from_user" INTEGER (32) NOT NULL,
 	"to_user" INTEGER (32) NOT NULL,
 	"challenge" TEXT (256) NOT NULL,
-	"num_days" INTEGER (3) NOT NULL,
+	"num_days" INTEGER (3) DEFAULT 3,
 	"stake" INTEGER (256) NOT NULL,
 	"time_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	"time_ended" TIMESTAMP,
