@@ -21,16 +21,13 @@ function clearText (el) {
 function changeContent (page) {
   CUR_PAGE = page;
   switch (page) {
-    case "my":
+    default:
       fbRequireLogin(function () {
         load_myinfo ();
-        setTimeout (load_mycel, 500);
-        setTimeout (load_friends, 1000);
+        load_mycel ();
+        load_friends ();
       });
-      break;
-    default:
   }
-
 }
 
 function updateStatus (el) {
@@ -47,10 +44,13 @@ function updateStatus (el) {
 }
 
 function loadCurrentPage () {
+/*
   var params = getArgs ();
   if (params["loc"] == undefined)
     params["loc"] == "";
 
   if (params["loc"] != CUR_PAGE)
     changeContent (params["loc"]);
+*/
+  changeContent ("");
 }
