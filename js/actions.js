@@ -18,6 +18,17 @@ function clearText (el) {
   }
 }
 
+function startSearch () {
+  $('#friends-search-box').change ( function () {
+    updateFriendBlock (function (name) {
+      return name.toLowerCase().indexOf(
+        jQuery.trim($('#friends-search-box').val())
+          .toLowerCase()) != -1;
+    });
+  });
+
+}
+
 function changeContent (page) {
   CUR_PAGE = page;
   switch (page) {
@@ -65,7 +76,21 @@ function boxOpen (open_id, open_url, parent_el) {
       $("#"+ parent_el).append( $("<div id='"+ open_id + "' class='lightbox' ></div>")
       .append (text)
       .show ());
+      $('.lightbox').bind ('click', function (event) {
+        event.stopPropagation ();
+      });
     }
    });
 }
 
+
+  function validateChallenge () {
+    if ($('input:[type="text"][name="challenge"]').val () == "" ||
+        parseInt($('input:[type="text"][name="stake"]').val ()) > USER_INFO.points) {
+      alert ("You must enter a valid challenge");
+      return false;
+    }
+    $('input:[type="text"][name="stake"]').val (
+      parseInt($('input:[type="text"][name="stake"]').val()));
+    return true;  
+  }

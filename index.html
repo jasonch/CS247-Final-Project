@@ -45,7 +45,12 @@
   <div class='wrapper'>
     <div id='system-message'></div>
     <div class='left-side'>
-      <div id='block-friends'>&nbsp;</div>
+      <div id='block-friends'>
+        <div class='friends-search'>
+          <input type='text' id='friends-search-box' value='search...' onclick='clearText(this); startSearch();'></input>
+        </div><!-- end friends-search -->
+        <div id='friends-list'></div>
+      </div><!-- end block-friends -->
     </div><!-- end left-side -->
 
     <div class='right-side'>
