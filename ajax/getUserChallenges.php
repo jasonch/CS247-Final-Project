@@ -2,9 +2,14 @@
 
     include ('./connect.php');
     
-    $user_id = $_GET['user_id'];
-    $challengesSentQuery = "SELECT * FROM challenges WHERE from_user = '".$user_id."'";
-    $challengesRecievedQuery = "SELECT * FROM challenges WHERE to_user = '".$user_id."'";
+    $user_id = $_POST['user_id'];
+    $user_id = '536865381';
+    $challengesSentQuery = "SELECT " .
+      " from_user, to_user, challenge, num_days, stake, strftime ('%s', time_created) AS time_created ".
+      " FROM challenges WHERE from_user = '".$user_id."'";
+    $challengesRecievedQuery = "SELECT " .
+      " from_user, to_user, challenge, num_days, stake, strftime ('%s', time_created) AS time_created ".
+      " FROM challenges WHERE to_user = '".$user_id."'"; // TODO: MERGE into one query.	
 
 	try {
 		$challengesSent = $db->query ($challengesSentQuery);
@@ -18,7 +23,7 @@
       		$challenge->to_user = $row["to_user"];
       		$challenge->challenge = $row["challenge"];
       		$challenge->num_days = $row["num_days"];
-      		$challenge->stake = $row["num_days"];
+      		$challenge->stake = $row["stake"];
       		$challenge->timestamp = $row["time_created"];
       		$challenge->message = $row["status"];
       		$sent[] = $challenge; 
@@ -29,7 +34,7 @@
       		$challenge->to_user = $row["to_user"];
       		$challenge->challenge = $row["challenge"];
       		$challenge->num_days = $row["num_days"];
-      		$challenge->stake = $row["num_days"];
+      		$challenge->stake = $row["stake"];
       		$challenge->timestamp = $row["time_created"];
       		$challenge->message = $row["status"];
       		$received[] = $challenge;
