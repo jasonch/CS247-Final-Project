@@ -15,9 +15,8 @@ function load_friends () {
         var id = friends.data[i].id;
         var friendname = friends.data[i].name;
         $('#friend-item-' + id).bind ('click', {fid:id, fname: friendname}, function (event) {
-          window.open (
-            AJAX_DIR + "challengeFriend.php?from="+USER_INFO.user_id + "&to=" + event.data.fid+"&fname="+event.data.fname,
-            "Challenge A Friend", "status=0,toolbar=0,menubar=0,resizable=no,height=300,width=500,left=400,top=300,scrollbars=no");
+          boxOpen ("challenge-friend",
+            "challengeFriend.php?from="+USER_INFO.user_id + "&to=" + event.data.fid+"&fname="+event.data.fname, "friend-item-"+ event.data.fid);
         });
       }
       $('.friend-item').bind('mouseenter mouseleave', function () {
@@ -31,5 +30,5 @@ function formatFriendItem(f, id) {
 
   return "<div class='friend-item' id='friend-item-"+id+"'>"+
     "<div class='user_pic'><img src='http://graph.facebook.com/" + 
-    f.id + "/picture'/></div><a href='#'>"+f.name+"</a></div>";
+    f.id + "/picture'/></div>"+f.name+"</div>";
 }

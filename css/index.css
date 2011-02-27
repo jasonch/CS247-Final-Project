@@ -66,6 +66,16 @@ body {
   background: #CCFFCC;
 }
 
+.lightbox {
+  position: relative;
+  background: white;
+  border: 5px solid black;
+  width: 300px;
+  height: 200px;
+  left: 200px;
+  z-index: 10;
+}
+
 #block-my-info {
   margin: 20px;
   width: 600px;

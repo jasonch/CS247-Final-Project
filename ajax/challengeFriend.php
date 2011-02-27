@@ -4,7 +4,6 @@
 	$fromUserId = $_GET["from"];
 	$toUserId = $_GET["to"];
 ?>
-
 	<form name ="challengeFreind" action = "addChallenge.php" method = "post">	
 		Challenge <? echo $friendName; ?> to quit: <input type = "text" name = "challenge" /> for 3 days<br />
 		Wager: <input type = "text" name = "stake" /> <br />

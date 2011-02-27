@@ -12,8 +12,7 @@
 	$insertQuery = "INSERT INTO challenges ('from_user', 'to_user', 'challenge', 'stake') VALUES ('".$aFromUser."','".$aToUser."', '".$challenge."', '".$aNumDays."', '".$aStake."')";	
 	try {
 		$db->query($insertQuery);	
-		$bool = true;
-		echo json_encode($bool);
+	  echo "true";	
 	} catch (PDOException $e) {
 		echo $e;
 	}

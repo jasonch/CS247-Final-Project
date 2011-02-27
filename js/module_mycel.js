@@ -6,29 +6,32 @@ function load_mycel () {
     success: function (data) {
        var challenges = eval ('(' + data + ')');
         $('#block-my-cel').html (data);
-       	$('#block-my-cel').html (format_mycel (challenges));
+        //if (challenges != undefined)
+        // 	$('#block-my-cel').html (format_mycel (challenges));
     }
   });
 }
 
-function formatMyCel (challenges) {
+function format_mycel (challenges) {
+  window.my_challenges = challenges;
   var result = "";
-  var list = "<body My Challenge List </body>";
-  var oldDate = new Date(challenge[i].timestamp);
-  var newDate = new Date();
-  var numDaysLeft = newDate.getDate() - oldDate.getDate(); 
-  for (var i = 0; i < challenges.from.length; i++) {
+  var list = "<div class'title'> My Challenge List </div>";
+  for (var i = 0; i < challenges.sent.length; i++) {
+    var callengeList = challenges.sent;
+    var oldDate = new Date(challengeList[i].timestamp);
+    var newDate = new Date();
+    var numDaysLeft = newDate.getDate() - oldDate.getDate(); 
   	
   	var eChallenge = 
-      "<div class=user_challenges>" +
-      "id='user-challenge'" +
-      "<dl>
-	  "<dt>" + challenges[i].challenge + "</dt>"+
-	  "<dd>Number of days left for " + challenge[i].to_User +" to complete challenge" +
+      "<div class='user_challenges' id='user-challenge-" + chellenges[i].challenge_id + "'><dl>" + 
+	  "<dt>" + challengeList[i].challenge + "</dt>"+
+	  "<dd>Number of days left for " + challengeList[i].to_User +" to complete challenge" +
 	  " = " +numDaysLeft+ "</dd>" +
-	  "<dd>What's at stake: $" + challenge[i].stake+ "</dd>"+
+	  "<dd>What's at stake: $" + challengeList[i].stake+ "</dd>"+
 	  "</dl>" +
       "</div>";
-  	
+  	result += eChallenge;
   }
+
+  return list+ result + "</div>";
 }

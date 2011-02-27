@@ -54,3 +54,18 @@ function loadCurrentPage () {
 */
   changeContent ("");
 }
+
+
+function boxOpen (open_id, open_url, parent_el) {
+  $.ajax ({
+    type: "POST",
+    url: AJAX_DIR + open_url,
+    success: function (text) {
+      $('#' + open_id).remove ();
+      $("#"+ parent_el).append( $("<div id='"+ open_id + "' class='lightbox' ></div>")
+      .append (text)
+      .show ());
+    }
+   });
+}
+
