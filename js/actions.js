@@ -19,7 +19,7 @@ function clearText (el) {
 }
 
 function startSearch () {
-  $('#friends-search-box').keypress ( function () {
+  $('#friends-search-box').keyup ( function () {
     updateFriendBlock (function (name) {
       return name.toLowerCase().indexOf(
         jQuery.trim($('#friends-search-box').val())
