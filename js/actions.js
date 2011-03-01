@@ -19,7 +19,7 @@ function clearText (el) {
 }
 
 function startSearch () {
-  $('#friends-search-box').change ( function () {
+  $('#friends-search-box').keypress ( function () {
     updateFriendBlock (function (name) {
       return name.toLowerCase().indexOf(
         jQuery.trim($('#friends-search-box').val())
@@ -93,8 +93,8 @@ function boxOpen (open_id, open_url, parent_el) {
     var friend = $('input:[type="hidden"][name="to_user"]').val ();
     var text = $('input:[type="text"][name="challenge"]').val ();
     var enteredStake = parseInt($('input:[type="text"][name="stake"]').val ());
-    if (isNaN (enteredStake) ||
-        text  == "" || 
+
+    if (isNaN (enteredStake) || text  == "" || 
         enteredStake > USER_INFO.points ||
         enteredStake > FRIENDS[friend].points ) {
       alert ("You must enter a valid challenge");

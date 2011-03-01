@@ -14,10 +14,14 @@ function friendArrayToObject (friends) {
 }
 
 function formatFriendItem(f, id) {
-
-  return "<div class='friend-item' id='friend-item-"+id+"'>"+
+  var result = "<div class='friend-item' id='friend-item-"+id+"'>"+
     "<div class='user_pic'><img src='http://graph.facebook.com/" + 
-    f.id + "/picture'/></div>"+f.name+"</div>\n";
+    f.id + "/picture'/></div><div class='friend-name'>"+f.name+"</div>";
+  if (id == "536865381") console.log (f);
+  if (f.message != undefined)
+    result += "<div class='friends-message'>" + f.message + "</div>";
+  result += "</div>\n";
+  return result;
 }
 
 function updateFriendBlock (nameFilter) {

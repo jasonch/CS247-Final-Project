@@ -19,12 +19,13 @@
     function(){
       //var defaults = ["using facebook", "saying 'like'", "cussing", "watching TV series", "eating fries", "drinking coffee", "having caffeine"];
       loadCurrentPage ();
-      //setInterval (loadCurrentPage, 300);
+      // removes all lightboxes when clicking outside of them
       $('html').bind ('click', function () {
         if ($('.lightbox').length != 0) {
           $('.lightbox').remove ();
         }
       });
+      
     });
 </script>
 </head>

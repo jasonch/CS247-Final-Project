@@ -19,7 +19,7 @@ if ($target_exist) {
      window.FRIENDS['".$to_user ."'].message ='".$target->message ."'</script>";
   echo '<form id="challenge-friend-form" name ="challengeFriend">'.	
     'Set a goal for ' .$_GET['fname']. ' to stop <input type = "text" id = "challenge" name = "challenge" /><br />'.
-  	'Wager: $<input type = "text" name = "stake" /> <br />'.
+  	'bounty $<input type = "text" name = "stake" value="(up to '. $target->points . ')"/> <br />'.
   	'<input type = "hidden" name = "from_user" value = "' . $_GET['from'] . '"/> <br />' .
     '<input type = "hidden" name = "to_user" value = "' . $_GET['to'] . '" /> <br/>' .
     '<input type="button" value = "Send" onClick="return validateChallenge();"> <br/>' .
