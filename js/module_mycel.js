@@ -18,9 +18,22 @@ function format_mycel (challenges) {
   var list = "<div class'title'> My Challenge List </div>";
 
   var pending = []; // need to distinguish whether the challengee has accepted
+  
+  for (var j = 0; j < challenges.recieved.length; j++) {
+  	if (challenges.recieved[i].status == 0) { // The challenge is pending...
+  		var challenge = challenges.recieved[i];
+  		pending.push(challenge);
+  	}
+  }
+  for (var k = 0; k < pending.length k++) {
+    var pendingChallenge = pending[k];
+    var ePendingChallenge = 
+      pendingChallenge.fromUser + "has challenged you to" + pendingChallenge.challenge + "." + "<button type='button'>" + Accept + "</button> <button type='button'>" + Decline + "</button>";
+  }
+  
   var started = []; // by checking the status of the challenge
   for (var i = 0; i < challenges.sent.length; i++) {
-    var callenge = challenges.sent[i];
+    var chellenge = challenges.sent[i];
 
     var oldDate = new Date(challenge.timestamp);
     var newDate = new Date();
@@ -30,7 +43,7 @@ function format_mycel (challenges) {
 	  
   
   	var eChallenge = 
-      "<div class='user_challenges' id='user-challenge-" + chellenge.challenge_id + "'><dl>" + 
+      "<div class='user_challenges' id='user-challenge-" + challenge.challenge_id + "'><dl>" + 
 	  "<dt>" + challenge.challenge + "</dt>"+
 	  "<dd>Number of days left for " + challenge.to_user +" to complete challenge" +
 	  " = " +numDaysLeft+ "</dd>" +
@@ -39,6 +52,5 @@ function format_mycel (challenges) {
       "</div>";
   	result += eChallenge;
   }
-
   return list+ result + "</div>";
 }
