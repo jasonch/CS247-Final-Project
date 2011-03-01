@@ -25,24 +25,24 @@ function formatFriendItem(f, id) {
 }
 
 function updateFriendBlock (nameFilter) {
-	    var result = "";
-      var count = 0;
-      $('#friends-list').html ("");
-	    for(var i in FRIENDS) {
-        if (!nameFilter (FRIENDS[i].name)) continue;
-        $('#friends-list').append (formatFriendItem(FRIENDS[i], FRIENDS[i].id));
-        // binds the click event to this item, need to be in formatFriendItem if append is done asynchronously...
-        $('#friend-item-' + FRIENDS[i].id).bind ('click', {fid:FRIENDS[i].id, fname: FRIENDS[i].name}, function (event) {
-          boxOpen ("challenge-friend",
-            "challengeFriend.php?from="+USER_INFO.user_id + "&to=" + event.data.fid+"&fname="+event.data.fname, "friend-item-"+ event.data.fid);
-        });
-        count++;
-        if (count > 20) break;
-	    }
-
-      $('.friend-item').bind('mouseenter mouseleave', function () {
-        $(this).toggleClass('focused');
+  var result = "";
+  var count = 0;
+  $('#friends-list').html ("");
+  for(var i in FRIENDS) {
+    if (!nameFilter (FRIENDS[i].name)) continue;
+    $('#friends-list').append (formatFriendItem(FRIENDS[i], FRIENDS[i].id));
+    // binds the click event to this item, need to be in formatFriendItem if append is done asynchronously...
+    $('#friend-item-' + FRIENDS[i].id).bind ('click', {fid:FRIENDS[i].id, fname: FRIENDS[i].name}, function (event) {
+      boxOpen ("challenge-friend",
+        "challengeFriend.php?from="+USER_INFO.user_id + "&to=" + event.data.fid+"&fname="+event.data.fname, "friend-item-"+ event.data.fid);
       });
+    count++;
+    if (count > 20) break;
+  }
+
+  $('.friend-item').bind('mouseenter mouseleave', function () {
+    $(this).toggleClass('focused');
+  });
 
 }
 

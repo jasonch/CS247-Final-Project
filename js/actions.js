@@ -108,9 +108,11 @@ function boxOpen (open_id, open_url, parent_el) {
       url: AJAX_DIR + "addChallenge.php",
       data: "from_user="+ USER_INFO.user_id + "&to_user=" + friend + "&stake=" + enteredStake + "&challenge=" + text,
       success: function (text) {
-        if (text != "false") 
+        $('#challenge-friend').remove ();
+        if (text == "true") {
           systemMessage ("Request sent!");
-        else 
+          load_myinfo ();
+        } else 
           systemMessage ("An error occurred with your request.");
       }
     });
