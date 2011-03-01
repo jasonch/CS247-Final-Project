@@ -8,7 +8,7 @@ CREATE TABLE challenges (
 	"stake" INTEGER (256) NOT NULL,
 	"time_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	"time_ended" TIMESTAMP,
-	"status" INTEGER (3) NOT NULL DEFAULT 1, -- "1=>requested, 2=>accepted,3=>acomplished,4=>failed"
+	"status" INTEGER (4) NOT NULL DEFAULT 0, -- "0=>not yet accepted, 1=>requested, 2=>accepted,3=>acomplished,4=>failed"
 	PRIMARY KEY ("challenge_id")
 );
 DROP TABLE IF EXISTS friends;
