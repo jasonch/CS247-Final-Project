@@ -111,7 +111,7 @@ function boxOpen (open_id, open_url, parent_el) {
         $('#challenge-friend').remove ();
         if (text == "true") {
           systemMessage ("Request sent!");
-          load_myinfo ();
+          fbLoadUserInfo(load_myinfo);
         } else 
           systemMessage ("An error occurred with your request.");
       }
