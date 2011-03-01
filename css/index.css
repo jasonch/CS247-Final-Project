@@ -65,6 +65,9 @@ body {
 .focused {
   background: #CCFFCC;
 }
+.friend-name {
+
+}
 
 .lightbox {
   position: relative;

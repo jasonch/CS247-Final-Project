@@ -1,1 +1,1 @@
-INSERT INTO users VALUES ("seanw4", 0, "Sean", "Woolfolk", NULL, NULL); 
+INSERT INTO users (`user_id`, `name`, `points`) VALUES ('536865381', 'Sean Woolfolk', 30); 

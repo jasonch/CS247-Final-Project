@@ -18,13 +18,20 @@
 
   function fbRequireLogin (callback) {
     if (USER_INFO.id ==  undefined) {
-      FB.login (function (response) {
+      FB.getLoginStatus (function (response) {
+        // don't call FB.login if already logged in
         if (response.session) {
           fbLoadUserInfo (callback);
         } else {
-          alert ("Login Required!");
+          FB.login (function (response) {
+            if (response.session) {
+              fbLoadUserInfo (callback);
+            } else {
+              alert ("Login Required!");
+            }
+          });
         }
-      });
+       });
     } else {
       callback ();
     }

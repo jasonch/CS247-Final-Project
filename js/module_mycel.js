@@ -40,5 +40,10 @@ function format_mycel (challenges) {
   	result += eChallenge;
   }
 
+  // received challenges
+  for (var i = 0; i < challenges.received.length; i++) {
+    var challenge = challenges.received[i];
+  }
+
   return list+ result + "</div>";
 }

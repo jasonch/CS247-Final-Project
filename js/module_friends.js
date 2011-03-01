@@ -1,8 +1,16 @@
 function load_friends () {
 	  FB.api ('/me/friends', function (friends) {
-      window.FRIENDS = friends.data;
+      window.FRIENDS = friendArrayToObject (friends.data); 
       updateFriendBlock (function () {return true;});
 	  });
+}
+
+function friendArrayToObject (friends) {
+  var Obj = {};
+  for (var i = 0; i < friends.length; i++) {
+    Obj[friends[i].id] = friends[i];
+  }
+  return Obj;
 }
 
 function formatFriendItem(f, id) {
@@ -15,8 +23,7 @@ function formatFriendItem(f, id) {
 function updateFriendBlock (nameFilter) {
 	    var result = "";
       var count = 0;
-      console.log (FRIENDS.length);
-	    for(var i = 0; i < FRIENDS.length; i++) {
+	    for(var i in FRIENDS) {
         if (!nameFilter (FRIENDS[i].name)) continue;
 	      result += formatFriendItem(FRIENDS[i], FRIENDS[i].id);
         count++;
@@ -24,7 +31,9 @@ function updateFriendBlock (nameFilter) {
 	    }
 	    $('#friends-list').html (result);
 
-      for (var i = 0, count = 0; i < FRIENDS.length; i++) {
+      // must do this separately becaue the html needs
+      // to be rendered first
+      for (var i in FRIENDS) {
         if (!nameFilter (FRIENDS[i].name)) continue;
         var id = FRIENDS[i].id;
         var friendname = FRIENDS[i].name;
