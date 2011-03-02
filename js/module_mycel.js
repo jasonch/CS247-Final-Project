@@ -16,41 +16,20 @@ function format_mycel (challenges) {
   window.MY_CHALLENGES = challenges; // set global variable for future reference
   var result = "";
   var list = "<div class'title'> My Challenge List </div>";
-
-  var pending = []; // need to distinguish whether the challengee has accepted
+  var pending = [];
   
-  for (var j = 0; j < challenges.recieved.length; j++) {
-  	if (challenges.recieved[i].status == 0) { // The challenge is pending...
-  		var challenge = challenges.recieved[i];
+  for (var i = 0; i < challenges.received.length; i++) {
+  	if (challenges.received[i].status == 0) { // The challenge is pending...
+  		var challenge = challenges.received[i];
   		pending.push(challenge);
   	}
   }
-  for (var k = 0; k < pending.length k++) {
-    var pendingChallenge = pending[k];
-    var ePendingChallenge = 
-      pendingChallenge.fromUser + "has challenged you to" + pendingChallenge.challenge + "." + "<button type='button'>" + Accept + "</button> <button type='button'>" + Decline + "</button>";
-  }
   
-  var started = []; // by checking the status of the challenge
-  for (var i = 0; i < challenges.sent.length; i++) {
-    var chellenge = challenges.sent[i];
-
-    var oldDate = new Date(challenge.timestamp);
-    var newDate = new Date();
-    var numDaysLeft = (newDate.getTime () - oldDate.getTime ()) / 86400; // num seconds difference divided by number of seconds in a day
-    if (numDaysLeft < 0); // call some functions to handle challenge passed
-    if (challenge.status == 1); // add to pending list
-	  
-  
-  	var eChallenge = 
-      "<div class='user_challenges' id='user-challenge-" + challenge.challenge_id + "'><dl>" + 
-	  "<dt>" + challenge.challenge + "</dt>"+
-	  "<dd>Number of days left for " + challenge.to_user +" to complete challenge" +
-	  " = " +numDaysLeft+ "</dd>" +
-	  "<dd>What's at stake: $" + challenge.stake+ "</dd>"+
-	  "</dl>" +
-      "</div>";
-  	result += eChallenge;
+  for (var j = 0; j < pending.length; j++) {
+    var pendingChallenge = pending[j];
+    result += 
+      pendingChallenge.fromUser + "has challenged you to" + pendingChallenge.challenge + "." + "<button type='button'> Accept </button> <button type='button'> Decline </button>";
   }
-  return list+ result + "</div>";
-}
+  return result;
+  
+ }
