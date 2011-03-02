@@ -29,12 +29,21 @@
 	$insertQuery = "INSERT INTO challenges ('from_user', 'to_user', 'challenge', 'stake') VALUES 
 		('".$aFromUser."','".$aToUser."', '".$aChallenge."', '".$aStake."')";
   $updateStake = "UPDATE users SET points = (points - $aStake) WHERE user_id = '$aFromUser'";
+  $smaller = $aFromUser;
+  $bigger = $aToUser;
+  if ($smaller > $bigger) {
+    $smaller = $aToUser;
+    $bigger = $aFromUser;
+  }
+  
+  $addFriendship = "INSERT OR IGNORE INTO friends (`user_id`, `friend_id`) VALUES ('$smaller', '$bigger')";
 
 	try {
     $db->beginTransaction ();
 
 		$count = $db->exec($insertQuery);	
     $count2 = $db->exec ($updateStake);
+    $count3 = $db->exec ($addFriendship); // don't need to verify
     $db->commit ();
     if ($count != 1 || $count2 != 1) {
       $db->rollBack ();
@@ -42,7 +51,8 @@
     } else 
   	  echo "true";	
 	} catch (PDOException $e) {
-		echo $e;
+    $db->rollBack ();
+    echo $e;
 	}
 	
 ?>

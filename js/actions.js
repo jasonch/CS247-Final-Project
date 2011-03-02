@@ -111,10 +111,14 @@ function boxOpen (open_id, open_url, parent_el) {
         $('#challenge-friend').remove ();
         if (text == "true") {
           systemMessage ("Request sent!");
-          fbLoadUserInfo(load_myinfo);
+          fbLoadUserInfo(function () {
+            load_myinfo();
+            load_mycel ();
+          });
         } else 
           systemMessage ("An error occurred with your request.");
       }
     });
     return true;  
   }
+

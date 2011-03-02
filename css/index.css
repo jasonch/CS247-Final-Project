@@ -94,6 +94,10 @@ body {
 #block-my-cel {
   margin: 20px;
   width: 600px;
-  height: 120px;
+  min-height: 120px;
   border: 1px solid #000;
+  font-size: 14px;
+}
+#block-my-cel .title {
+  font-size: 20px;
 }
