@@ -19,12 +19,13 @@
     function(){
       //var defaults = ["using facebook", "saying 'like'", "cussing", "watching TV series", "eating fries", "drinking coffee", "having caffeine"];
       loadCurrentPage ();
-      //setInterval (loadCurrentPage, 300);
+      // removes all lightboxes when clicking outside of them
       $('html').bind ('click', function () {
         if ($('.lightbox').length != 0) {
           $('.lightbox').remove ();
         }
       });
+      
     });
 </script>
 </head>
@@ -38,7 +39,7 @@
       <a href='#'><img src='images/cel_logo.png' width='220px'/></a>
     </div>
     <div class='nav_links'>
-      <fb:login-button autologoutlink='true' size='medium'/>   
+      <fb:login-button autologoutlink='true' size='medium'></fb:login-button>   
     </div>
   </div><!-- end header -->
 
@@ -47,7 +48,7 @@
     <div class='left-side'>
       <div id='block-friends'>
         <div class='friends-search'>
-          <input type='text' id='friends-search-box' value='search...' onclick='clearText(this); startSearch();'></input>
+          <input type='text' id='friends-search-box' value='search...' onClick='clearText(this); startSearch();'></input>
         </div><!-- end friends-search -->
         <div id='friends-list'></div>
       </div><!-- end block-friends -->

@@ -1,5 +1,4 @@
 function load_myinfo () {
-    console.log (window.USER_INFO);
     $('#block-my-info').html (formatUserInfo(window.USER_INFO));
 }
 

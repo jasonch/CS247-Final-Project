@@ -1,11 +1,25 @@
 
   function fbLoadUserInfo (callback) {
 
-    FB.api ('/me', function (user) {
-      $.ajax ({
+    if (window.USER_INFO.user_id == undefined) {
+      FB.api ('/me', function (user) {
+        $.ajax ({
+          type: "POST",
+          url: AJAX_DIR + "addUser.php",
+          data: "user_id=" + user.id + "&name=" +user.name, 
+          success: function(data) {
+            if (data != "false") {
+              window.USER_INFO = eval ('(' + data + ')');
+              callback();
+            }
+          }
+       });
+      }); 
+    } else {
+       $.ajax ({
         type: "POST",
-        url: AJAX_DIR + "addUser.php",
-        data: "user_id=" + user.id + "&name=" +user.name, 
+        url: AJAX_DIR + "getUser.php",
+        data: "user_id=" + window.USER_INFO.user_id,  
         success: function(data) {
           if (data != "false") {
             window.USER_INFO = eval ('(' + data + ')');
@@ -13,18 +27,25 @@
           }
         }
       });
-    }); 
+    }   
   }
 
   function fbRequireLogin (callback) {
     if (USER_INFO.id ==  undefined) {
-      FB.login (function (response) {
+      FB.getLoginStatus (function (response) {
+        // don't call FB.login if already logged in
         if (response.session) {
           fbLoadUserInfo (callback);
         } else {
-          alert ("Login Required!");
+          FB.login (function (response) {
+            if (response.session) {
+              fbLoadUserInfo (callback);
+            } else {
+              alert ("Login Required!");
+            }
+          });
         }
-      });
+       });
     } else {
       callback ();
     }
