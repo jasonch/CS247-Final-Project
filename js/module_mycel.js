@@ -19,7 +19,7 @@ function format_mycel (challenges) {
   var pending = [];
   
   for (var i = 0; i < challenges.received.length; i++) {
-  	if (challenges.received[i].status == 0) { // The challenge is pending...
+  	if (challenges.received[i].message == 0) { // The challenge is pending...
   		var challenge = challenges.received[i];
   		pending.push(challenge);
   	}

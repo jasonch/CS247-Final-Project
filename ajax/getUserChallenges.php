@@ -5,10 +5,10 @@
     $user_id = $_POST['user_id'];
     $user_id = '536865381';
     $challengesSentQuery = "SELECT " .
-      " from_user, to_user, challenge, num_days, stake, strftime ('%s', time_created) AS time_created ".
+      " from_user, to_user, challenge, num_days, stake, strftime, status ('%s', time_created) AS time_created ".
       " FROM challenges WHERE from_user = '".$user_id."'";
     $challengesRecievedQuery = "SELECT " .
-      " from_user, to_user, challenge, num_days, stake, strftime ('%s', time_created) AS time_created ".
+      " from_user, to_user, challenge, num_days, stake, strftime, status ('%s', time_created) AS time_created ".
       " FROM challenges WHERE to_user = '".$user_id."'"; // TODO: MERGE into one query.	
 
 	try {
