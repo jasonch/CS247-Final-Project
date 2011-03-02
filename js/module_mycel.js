@@ -40,6 +40,9 @@ function format_mycel (challenges) {
       case "0":
         sent_pending.push (challenge);
         break;
+      case "1":
+        sent_active.push (challenge);
+        break;
     }
   }
 
@@ -47,7 +50,7 @@ function format_mycel (challenges) {
   for (var i = 0; i < sent_pending.length; i++) {
     var challenge = sent_pending[i];
     result += "<div class='challenge-item pending' id='challenge-id-" + challenge.challenge_id + "'>";
-    result += window.FRIENDS[challenge.to_user].name + " has not accepted your challenge to stop " + challenge.challenge + " for $" + challenge.stake;
+      result += window.FRIENDS[challenge.to_user].name + " has not accepted your challenge to stop " + challenge.challenge + " for $" + challenge.stake;
     result += " <a onclick='cancelChallenge("+challenge.challenge_id+")' href='#'>Cancel</a>";
     result += "</div>";
   }
@@ -76,6 +79,7 @@ function cancelChallenge (id) {
       if (response == "true") {
         systemMessage ("Request Cancelled");
         $('#challenge-id-' + id).remove ();
+        fbLoadUserInfo (load_myinfo);
       } else {
         systemMessage ("An error occurred");
       }
@@ -92,7 +96,7 @@ function busted (id) {
       if (response == "true") {
         systemMessage ("BUSTED!");
         $('#challenge-id-' + id).remove ();
-        load_myinfo ();
+        fbLoadUserInfo (load_myinfo);
       } else {
         systemMessage ("An error occurred");
       }

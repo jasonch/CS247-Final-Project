@@ -34,9 +34,9 @@ function changeContent (page) {
   switch (page) {
     default:
       fbRequireLogin(function () {
+        fbLoadFriends (load_friends);
         load_myinfo ();
-        load_mycel ();
-        load_friends ();
+        fbLoadFriends (load_mycel);
       });
   }
 }
@@ -111,7 +111,7 @@ function boxOpen (open_id, open_url, parent_el) {
         $('#challenge-friend').remove ();
         if (text == "true") {
           systemMessage ("Request sent!");
-          fbLoadUserInfo(function () {
+          fbLoadUserInfo( function () {
             load_myinfo();
             load_mycel ();
           });
@@ -122,3 +122,9 @@ function boxOpen (open_id, open_url, parent_el) {
     return true;  
   }
 
+
+function clearLightbox () {
+  if ($('.lightbox').length != 0) {
+    $('.lightbox').remove ();
+  }
+}

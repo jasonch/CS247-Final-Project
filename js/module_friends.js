@@ -1,8 +1,7 @@
 function load_friends () {
-	  FB.api ('/me/friends', function (friends) {
-      window.FRIENDS = friendArrayToObject (friends.data); 
-      updateFriendBlock (function () {return true;});
-	  });
+  fbLoadFriends (function (friends) {
+    updateFriendBlock (function () {return true;});
+	});
 }
 
 function friendArrayToObject (friends) {
@@ -17,7 +16,6 @@ function formatFriendItem(f, id) {
   var result = "<div class='friend-item' id='friend-item-"+id+"'>"+
     "<div class='user_pic'><img src='http://graph.facebook.com/" + 
     f.id + "/picture'/></div><div class='friend-name'>"+f.name+"</div>";
-  if (id == "536865381") console.log (f);
   if (f.message != undefined)
     result += "<div class='friends-message'>" + f.message + "</div>";
   result += "</div>\n";
@@ -28,7 +26,7 @@ function updateFriendBlock (nameFilter) {
   var result = "";
   var count = 0;
   $('#friends-list').html ("");
-  for(var i in FRIENDS) {
+  for(var i in window.FRIENDS) {
     if (!nameFilter (FRIENDS[i].name)) continue;
     $('#friends-list').append (formatFriendItem(FRIENDS[i], FRIENDS[i].id));
     // binds the click event to this item, need to be in formatFriendItem if append is done asynchronously...

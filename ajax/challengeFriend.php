@@ -18,12 +18,13 @@ if ($target_exist) {
     "window.FRIENDS['".$to_user ."'].points = ".$target->points .";
      window.FRIENDS['".$to_user ."'].message ='".$target->message ."'</script>";
   echo '<form id="challenge-friend-form" name ="challengeFriend">'.	
-    'Set a goal for ' .$_GET['fname']. ' to stop <input type = "text" id = "challenge" name = "challenge" /><br />'.
+    'Set a goal for ' .$_GET['fname']. ' to stop <input type = "text" id = "challenge" name = "challenge" /> for 3 days<br />'.
   	'bounty $<input type = "text" name = "stake" value="(up to '. $target->points . ')"/> <br />'.
   	'<input type = "hidden" name = "from_user" value = "' . $_GET['from'] . '"/> <br />' .
     '<input type = "hidden" name = "to_user" value = "' . $_GET['to'] . '" /> <br/>' .
     '<input type="button" value = "Send" onClick="return validateChallenge();"> <br/>' .
-  	'</form>';
+    '<input type="button" value = "Cancel" onClick="return clearLightbox();"> <br/>' .
+  	'</form>' ;
 } else {
   echo $_GET['fname'] . " is not using CEL yet!<br/>Send an invite on Facebook!";
 //    instead of send, should publish a feed to ask the friend to join CEL and accept the challenge
