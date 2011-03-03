@@ -6,32 +6,35 @@
   
   $getChallenge = "SELECT from_user, to_user, stake FROM challenges WHERE challenge_id='$challenge_id'";
   try {
+    //$db->beginTransaction ();
+
     $result = $db->query ($getChallenge);
-    for ($result as $row) {
+    foreach ($result as $row) {
       $stake = $row['stake'];
       $to_user = $row['to_user'];
       break; // should be unique
     }
-    if (empty ($user) || empty ($stake) || $user_id != $to_user) {
+    if (empty ($stake) || $user_id != $to_user) {
       echo "false";
       exit ();
     }
 
-    $updateStake = "UPDATE OR ROLLBACK users SET points = (points - $stake)  WHERE user_id='$to_user'";
+    $updateStake = "UPDATE users SET points = (points - $stake)  WHERE user_id='$to_user'";
+    $updateStatus = "UPDATE challenges SET status = 1, time_started = CURRENT_TIMESTAMP WHERE challenge_id = '$challenge_id'";
+
     $count = $db->exec ($updateStake);
-    if ($count != 1)  {
+    $count2 = $db->exec ($updateStatus);
+    //$db->commit ();
+
+    if ($count != 1 || $count2 != 1)  {
       echo "false";
+      echo "count $count count2 $count2";
+      //$db->rollBack ();
       exit ();
     }
-    $updateStatus = "UPDATE challenges SET status = 2, time_started = CURRENT_TIMESTAMP WHERE challenge_id = '$challenge_id'";
-    $count = $db->exec ($updateStatus);
-    if ($count != 1) {
-      echo "false";
-      exit ();
-    } 
- 
     echo "true";
   } catch (PDOException $e) {
+    //$db->rollBack();
     echo "false";
     echo $e;
   }

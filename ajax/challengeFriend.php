@@ -26,7 +26,11 @@ if ($target_exist) {
     '<input type="button" value = "Cancel" onClick="return clearLightbox();"> <br/>' .
   	'</form>' ;
 } else {
-  echo $_GET['fname'] . " is not using CEL yet!<br/>Send an invite on Facebook!";
+  //echo "<div>" .$_GET['fname'] . " is not using C&Eacute;L yet!<br/>Send an invite on Facebook!</div>";
+  echo '<form action="#" id="invite friend" method="post">';
+  echo '<fb:friend-selector name="uid" prefill_id="' . $to_user .'"/>';
+  echo '<input type="submit" value="Invite '. $_GET['fname'] . '" />';
+  echo '</form>';
 //    instead of send, should publish a feed to ask the friend to join CEL and accept the challenge
 }
 ?>

@@ -17,19 +17,29 @@ function format_mycel (challenges) {
   var result = "";
   var list = "<div class'title'> My Challenge List </div>";
   var pending = [];
+  var active = [];
   
   for (var i = 0; i < challenges.received.length; i++) {
-  	if (challenges.received[i].message == 0) { // The challenge is pending...
-  		var challenge = challenges.received[i];
-  		pending.push(challenge);
+    var challenge = challenges.received[i];
+  	switch (challenge.status ) {
+      case "0":
+    		pending.push(challenge);
+        break;
+      case "1":
+        active.push(challenge);
+        break;
   	} 
   }
 
   result += "<div class='title'>Challenges For Me</div>";
   for (var j = 0; j < pending.length; j++) {
     var pendingChallenge = pending[j];
-    result += 
-      pendingChallenge.fromUser + " has challenged you to" + pendingChallenge.challenge + "." + "<button type='button'> Accept </button> <button type='button'> Decline </button>";
+    result += "<div class='challenge-item pending' id='challenge-id-" + pendingChallenge.challenge_id + "'>";
+    result += window.FRIENDS[pendingChallenge.from_user].name + " has challenged you to " ;
+    result += pendingChallenge.challenge + ".<br/>" ;
+    result += '<button type="button" onclick="acceptChallenge (' + pendingChallenge.challenge_id + ');"> Accept </button>';
+    result += '<button type="button" onclick="cancelChallenge (' + pendingChallenge.challenge_id + ');"> Decline </button>';
+    result += '</div>';
   }
 
   var sent_pending = [];
@@ -69,6 +79,25 @@ function format_mycel (challenges) {
   
  }
 
+function acceptChallenge (id) {
+  $.ajax ({
+    type: 'POST',
+    url: AJAX_DIR + 'acceptChallenge.php',
+    data: 'user_id='+window.USER_INFO.user_id+'&challenge_id='+id,
+    success: function (response) {
+      if (response == "true") {
+        systemMessage ("Request Accepted!");
+        $('#challenge-id-' + id).remove ();
+        fbLoadUserInfo (load_myinfo);
+        fbLoadFriends (load_mycel);
+      } else {
+        systemMessage ("An error occurred");
+      }
+    }
+
+  });
+
+}
 
 function cancelChallenge (id) {
   $.ajax ({

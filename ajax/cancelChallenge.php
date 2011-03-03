@@ -10,9 +10,10 @@
     foreach ($result as $row) {
       $stake = $row['stake'];
       $from_user = $row['from_user'];
+      $to_user = $row['to_user'];
       break; // should be unique
     }
-    if (empty ($from_user) || empty ($stake) || $user_id != $from_user) {
+    if (empty ($from_user) || empty ($stake) || ($user_id != $from_user && $user_id != $to_user)) {
       echo "false"; // something wrong with params passed in
       exit ();
     }
