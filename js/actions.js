@@ -128,3 +128,17 @@ function clearLightbox () {
     $('.lightbox').remove ();
   }
 }
+
+function inviteFriend () {
+  var friend = $('input:[type="hidden"][name="to_user"]').val ();
+  var text = $('input:[type="text"][name="challenge"]').val ();
+  if (text == "" || friend == undefined) return;
+  FB.ui ({
+    method: 'apprequests', 
+    message: 'I want to help you stop ' + text + ' on CEL!',
+    to: friend
+  });
+
+}
+
+
