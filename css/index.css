@@ -23,7 +23,12 @@ body {
   font-size: 2em;
   border: 0px;
 }
-
+input[type=text] {
+  color: gray;
+}
+#user-status-box {
+  color: black;
+}
 .wrapper {
   width: 1000px;
   height: 800px;

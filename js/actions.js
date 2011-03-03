@@ -14,6 +14,7 @@ function getArgs () {
 function clearText (el) {
   if (!el.no_clear_text) {
     el.no_clear_text = true;
+    el.style.color = "#000000";
     el.value = "";
   }
 }

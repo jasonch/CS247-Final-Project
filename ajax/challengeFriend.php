@@ -19,9 +19,9 @@
   echo '<form id="challenge-friend-form" name ="challengeFriend">'.	
   	'<input type = "hidden" name = "from_user" value = "' . $_GET['from'] . '"/> <br />' .
     '<input type = "hidden" name = "to_user" value = "' . $_GET['to'] . '" /> <br/>' .
-    'Set a goal for ' .$_GET['fname']. ' to stop <input type = "text" id = "challenge" name = "challenge" /> for 3 days<br />';
+    'Set a goal for ' .$_GET['fname']. ' to stop <input type = "text" id = "challenge" name = "challenge" onClick= "clearText(this);" value="drinking coffee"/> for 3 days<br />';
 if ($target_exist) {
-  echo	'wager $<input type = "text" name = "stake" value="(up to '. $target->points . ')"/> <br />'.
+  echo	'wager $<input type = "text" name = "stake" value="(up to '. $target->points . ')" onClick="clearText(this);"/> <br />'.
     '<input type="button" value = "Send" onClick="return validateChallenge();"> <br/>' .
     '<input type="button" value = "Cancel" onClick="return clearLightbox();"> <br/>' ;
 } else {
