@@ -25,8 +25,8 @@ if ($target_exist) {
     '<input type="button" value = "Send" onClick="return validateChallenge();"> <br/>' .
     '<input type="button" value = "Cancel" onClick="return clearLightbox();"> <br/>' ;
 } else {
-  echo	'wager $<input type = "text" name = "stake"/> <br />'.
-    '<a href="#" onClick="inviteFriend (' .$to_user. ');">Invite on Facebook!</a>' ;
+    echo $_GET['fname'] . " is not on C&Eactue;L Yet!";
+    echo '<a href="#" onClick="inviteFriend (' .$to_user. ');">Invite on Facebook!</a>' ;
 }
   echo '</form>' ;
 ?>
