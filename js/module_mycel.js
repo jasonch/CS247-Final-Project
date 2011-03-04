@@ -17,19 +17,35 @@ function format_mycel (challenges) {
   var result = "";
   var list = "<div class'title'> My Challenge List </div>";
   var pending = [];
+  var active = [];
   
   for (var i = 0; i < challenges.received.length; i++) {
+<<<<<<< HEAD:js/module_mycel.js
   	if (challenges.received[i].status == 0) { // The challenge is pending...
   		var challenge = challenges.received[i];
   		pending.push(challenge);
+=======
+    var challenge = challenges.received[i];
+  	switch (challenge.status ) {
+      case "0":
+    		pending.push(challenge);
+        break;
+      case "1":
+        active.push(challenge);
+        break;
+>>>>>>> 1ff461a434f65e687a69b2c196b73ca59611fa04:js/module_mycel.js
   	} 
   }
 
   result += "<div class='title'>Challenges For Me</div>";
   for (var j = 0; j < pending.length; j++) {
     var pendingChallenge = pending[j];
-    result += 
-      pendingChallenge.fromUser + " has challenged you to" + pendingChallenge.challenge + "." + "<button type='button'> Accept </button> <button type='button'> Decline </button>";
+    result += "<div class='challenge-item pending' id='challenge-id-" + pendingChallenge.challenge_id + "'>";
+    result += window.FRIENDS[pendingChallenge.from_user].name + " has challenged you to " ;
+    result += pendingChallenge.challenge + ".<br/>" ;
+    result += '<button type="button" onclick="acceptChallenge (' + pendingChallenge.challenge_id + ');"> Accept </button>';
+    result += '<button type="button" onclick="cancelChallenge (' + pendingChallenge.challenge_id + ');"> Decline </button>';
+    result += '</div>';
   }
 
   var sent_pending = [];
@@ -50,7 +66,7 @@ function format_mycel (challenges) {
   for (var i = 0; i < sent_pending.length; i++) {
     var challenge = sent_pending[i];
     result += "<div class='challenge-item pending' id='challenge-id-" + challenge.challenge_id + "'>";
-    result += window.FRIENDS[challenge.to_user].name + " has not accepted your challenge to stop " + challenge.challenge + " for $" + challenge.stake;
+      result += window.FRIENDS[challenge.to_user].name + " has not accepted your challenge to stop " + challenge.challenge + " for $" + challenge.stake;
     result += " <a onclick='cancelChallenge("+challenge.challenge_id+")' href='#'>Cancel</a>";
     result += "</div>";
   }
@@ -69,6 +85,25 @@ function format_mycel (challenges) {
   
  }
 
+function acceptChallenge (id) {
+  $.ajax ({
+    type: 'POST',
+    url: AJAX_DIR + 'acceptChallenge.php',
+    data: 'user_id='+window.USER_INFO.user_id+'&challenge_id='+id,
+    success: function (response) {
+      if (response == "true") {
+        systemMessage ("Request Accepted!");
+        $('#challenge-id-' + id).remove ();
+        fbLoadUserInfo (load_myinfo);
+        fbLoadFriends (load_mycel);
+      } else {
+        systemMessage ("An error occurred");
+      }
+    }
+
+  });
+
+}
 
 function cancelChallenge (id) {
   $.ajax ({
@@ -79,6 +114,7 @@ function cancelChallenge (id) {
       if (response == "true") {
         systemMessage ("Request Cancelled");
         $('#challenge-id-' + id).remove ();
+        fbLoadUserInfo (load_myinfo);
       } else {
         systemMessage ("An error occurred");
       }
@@ -95,7 +131,7 @@ function busted (id) {
       if (response == "true") {
         systemMessage ("BUSTED!");
         $('#challenge-id-' + id).remove ();
-        load_myinfo ();
+        fbLoadUserInfo (load_myinfo);
       } else {
         systemMessage ("An error occurred");
       }

@@ -21,13 +21,22 @@
         url: AJAX_DIR + "getUser.php",
         data: "user_id=" + window.USER_INFO.user_id,  
         success: function(data) {
-          if (data != "false") {
+          if (data != "false") 
             window.USER_INFO = eval ('(' + data + ')');
-            callback();
-          }
+          callback();
         }
       });
     }   
+  }
+
+  function fbLoadFriends (callback) {
+    if (window.FRIENDS == undefined) {
+      FB.api ('/me/friends', function (friends) {
+        window.FRIENDS = friendArrayToObject (friends.data);
+        callback ();
+      });
+    } else 
+      callback ();
   }
 
   function fbRequireLogin (callback) {

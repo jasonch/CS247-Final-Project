@@ -14,6 +14,7 @@ function getArgs () {
 function clearText (el) {
   if (!el.no_clear_text) {
     el.no_clear_text = true;
+    el.style.color = "#000000";
     el.value = "";
   }
 }
@@ -34,9 +35,9 @@ function changeContent (page) {
   switch (page) {
     default:
       fbRequireLogin(function () {
+        fbLoadFriends (load_friends);
         load_myinfo ();
-        load_mycel ();
-        load_friends ();
+        fbLoadFriends (load_mycel);
       });
   }
 }
@@ -111,7 +112,7 @@ function boxOpen (open_id, open_url, parent_el) {
         $('#challenge-friend').remove ();
         if (text == "true") {
           systemMessage ("Request sent!");
-          fbLoadUserInfo(function () {
+          fbLoadUserInfo( function () {
             load_myinfo();
             load_mycel ();
           });
@@ -121,4 +122,24 @@ function boxOpen (open_id, open_url, parent_el) {
     });
     return true;  
   }
+
+
+function clearLightbox () {
+  if ($('.lightbox').length != 0) {
+    $('.lightbox').remove ();
+  }
+}
+
+function inviteFriend () {
+  var friend = $('input:[type="hidden"][name="to_user"]').val ();
+  var text = $('input:[type="text"][name="challenge"]').val ();
+  if (text == "" || friend == undefined) return;
+  FB.ui ({
+    method: 'apprequests', 
+    message: 'I want to help you stop ' + text + ' on CEL!',
+    to: friend
+  });
+
+}
+
 
