@@ -34,12 +34,6 @@ input[type=text] {
   height: 800px;
   background: #ffffff;
 }
-
-#system-message {
-  height: 20px;
-  font-size: 20;
-}
-
 .nav_links {
   padding: 55px 0 0 250px;
 }
@@ -70,15 +64,19 @@ input[type=text] {
 }
 
 .friend-item {
-  height: 70px;
-  padding: 0 5px;
+  padding: 5px;
+  min-height: 80px;
+  border-bottom: 1px black solid;
 }
 .focused {
   background: #CCFFCC;
 }
-.friend-name {
-
+.friend-pic {
+  float:left;
 }
+.friend-name {
+}
+#f
 
 .lightbox {
   position: relative;
@@ -112,4 +110,11 @@ input[type=text] {
 }
 #block-my-cel .title {
   font-size: 20px;
+}
+
+.challenge {
+  border-bottom: 1px black solid;
+  padding: 5px;
+}
+.challenge .sent {
 }
