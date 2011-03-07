@@ -1,120 +1,51 @@
-*, html {
-  margin: 0 auto;
-  padding 0;
-}
-
 body {
-  width: 1000px;
 	font-family: arial, "arial black";
-	font-size: 1.4em;
-  background: #ffffff;
 }
 
-.header {
-  font-size: 20px;
-  height: 100px;
-  margin-bottom: 30px;
-  background: #ffffff;
-}
-.logo {
-  width: 220px;
-  height: 100px;
-  float: left;
-  font-size: 2em;
-  border: 0px;
-}
 input[type=text] {
   color: gray;
 }
-#user-status-box {
-  color: black;
-}
-.wrapper {
-  width: 1000px;
-  height: 800px;
-  background: #ffffff;
-}
-.nav_links {
-  padding: 55px 0 0 250px;
-}
-.nav_links a {
-  text-decoration: none;
-  color: #3399cc;
-}
-.nav_links a:hover {
-  color: white;
-  background: #3399cc;
-}
-
-.left-side {
-  float: left;
-}
-.right-side {
-  float: left;
-}
-
-#block-friends {
-  width: 250px;
-  min-height: 500px;
-  margin: 20px;
-  border: 1px solid #000;
-}
-.friends-search {
-  padding: 5px;
-}
-
 .friend-item {
-  padding: 5px;
-  min-height: 80px;
-  border-bottom: 1px black solid;
 }
-.focused {
-  background: #CCFFCC;
-}
+
 .friend-pic {
   float:left;
 }
 .friend-name {
-}
-#f
-
-.lightbox {
-  position: relative;
-  background: white;
-  border: 5px solid black;
-  width: 400px;
-  height: 200px;
-  left: 200px;
-  z-index: 10;
   padding: 10px;
 }
-
-#block-my-info {
-  margin: 20px;
-  width: 600px;
-  min-height: 220px;
-  border: 1px solid #000;
-}
-
-.user_pic {
+.user-pic {
   float: left;
   padding: 5px;
 }
 
-#block-my-cel {
-  margin: 20px;
-  width: 600px;
-  min-height: 120px;
-  border: 1px solid #000;
-  font-size: 14px;
-}
-#block-my-cel .title {
-  font-size: 20px;
-}
-
 .challenge {
-  border-bottom: 1px black solid;
+  border-bottom: 1px #555555 dotted;
   padding: 5px;
 }
-.challenge .sent {
+.challenge .to-user, .challenge .from-user {
+  display: inline;
+  font-weight: bold;
 }
+.challenge .time-left {
+  display: inline;
+}
+.challenge .challenge-text {
+  display: inline;
+  text-decoration: italic;
+}
+.received {
+  background: rgb(240,240,255);
+}
+
+.received .stake {
+  display: inline;
+}
+
+.sent {
+  background: rgb(255,240,240);
+}
+
+
+
+

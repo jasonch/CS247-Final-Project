@@ -1,16 +1,15 @@
 Ext.regModel('Friend', {
-    fields: ['name', 'id']
+    fields: ['name', 'id', 'points', 'message']
 });
 
-CEL.FriendStore = new Ext.data.Store({
+CEL.stores.FriendStore = new Ext.data.Store({
     model: 'Friend',
-    autoLoad: true,
     sortField: 'name',
     sorters: 'name',
     getGroupString : function(record) {
         return record.get('name')[0];
-    },
-    proxy: {
+    }
+/*    proxy: {
         type: 'ajax',
         url: 'http://www.stanford.edu/~jasonch/cgi-bin/cel/ajax/friends.json',
         reader: {
@@ -18,5 +17,9 @@ CEL.FriendStore = new Ext.data.Store({
           root: 'data',
         }
     }
+*/
+  ,data: [
+    {"name": "test", "id": "1234"} 
+  ]
 });
 

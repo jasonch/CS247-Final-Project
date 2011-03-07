@@ -1,16 +1,44 @@
 function load_mycel () {
-  $.ajax ({
-    type: "POST",
-    url: AJAX_DIR + "getUserChallenges.php",
-    data: "user_id=" + USER_INFO.user_id,
-    success: function (data) {
+  fbLoadFriends (function (friends) {
+    Ext.Ajax.request ({
+      method: "POST",
+      url: AJAX_DIR + "getUserChallenges.php",
+      params: { user_id: CEL.USER_INFO.user_id },
+      success: function (xhr) {
+       var data = xhr.responseText;
        var challenges = eval ('(' + data + ')');
-        if (challenges != undefined)
-          window.TAB_MYCEL.update (challenges);
-    }
+        if (challenges != undefined) {
+          getUserNames (challenges, friends);
+          CEL.MyCEL.update (challenges);
+        }
+      }
+    });
   });
 }
 
+function friendArrayToObject (friends) {
+  var Obj = {};
+  for (var i = 0; i < friends.length; i++) {
+    Obj[friends[i].id] = friends[i];
+  }
+  return Obj;
+}
+
+function getUserNames (challenges, friends) {
+
+  var friendsInfo = friendArrayToObject (friends);
+  for (var i = 0; i < challenges.sent.length; i++) {
+    if  (friendsInfo[challenges.sent[i].to_user] != undefined)
+      challenges.sent[i].to_user = friendsInfo[challenges.sent[i].to_user].name;
+  }
+  for (var i = 0; i < challenges.received.length; i++) {
+    if  (friendsInfo[challenges.received[i].from_user] != undefined)
+      challenges.received[i].from_user = friendsInfo[challenges.received[i].from_user].name;
+  }
+
+}
+
+/*
 function format_mycel (challenges) {
   window.MY_CHALLENGES = challenges; // set global variable for future reference
   var result = "";
@@ -132,4 +160,4 @@ function busted (id) {
 
   });
 }
-
+*/

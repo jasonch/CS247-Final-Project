@@ -1,16 +1,7 @@
 function load_friends () {
   fbLoadFriends (function (friends) {
-    window.TAB_FRIENDS.update (friends);
-
+    CEL.stores.FriendStore.loadData (friends);
   });
-}
-
-function friendArrayToObject (friends) {
-  var Obj = {};
-  for (var i = 0; i < friends.length; i++) {
-    Obj[friends[i].id] = friends[i];
-  }
-  return Obj;
 }
 
 function formatFriendItem(f, id) {
@@ -22,7 +13,7 @@ function formatFriendItem(f, id) {
   result += "</div>\n";
   return result;
 }
-
+/*
 function updateFriendBlock (nameFilter) {
   var result = "";
   var count = 0;
@@ -44,4 +35,4 @@ function updateFriendBlock (nameFilter) {
   });
 
 }
-
+*/

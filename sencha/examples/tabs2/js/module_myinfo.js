@@ -1,6 +1,6 @@
 function load_myinfo () {
   fbLoadUserInfo (function (user) {
-    window.TAB_MYINFO.update (user); 
+    CEL.MyInfo.update (user); 
   });
 }
 
