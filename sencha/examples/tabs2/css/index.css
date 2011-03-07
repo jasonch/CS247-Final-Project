@@ -32,7 +32,7 @@ input[type=text] {
 }
 .challenge .challenge-text {
   display: inline;
-  text-decoration: italic;
+  font-style: italic;
 }
 .received {
   background: rgb(240,240,255);
@@ -46,6 +46,11 @@ input[type=text] {
   background: rgb(255,240,240);
 }
 
+#fb-longin-button {
+  float: right;
+}
 
+.facebook {
+  background: url('../images/facebook-icon.png');
 
-
+}

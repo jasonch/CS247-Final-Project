@@ -8,7 +8,7 @@ var CUR_PAGE = "none";
 // performance cache
 var RECENT_CACHE = [];
  CEL.USER_INFO = {};
-var TABPANEL, TAB_MYCEL, TAB_MYINFO, TAB_FRIENDS;
+
 
 // macros
 function EMPTY_FUNC () {}

@@ -16,6 +16,7 @@ function load_mycel () {
   });
 }
 
+
 function friendArrayToObject (friends) {
   var Obj = {};
   for (var i = 0; i < friends.length; i++) {
@@ -25,7 +26,6 @@ function friendArrayToObject (friends) {
 }
 
 function getUserNames (challenges, friends) {
-
   var friendsInfo = friendArrayToObject (friends);
   for (var i = 0; i < challenges.sent.length; i++) {
     if  (friendsInfo[challenges.sent[i].to_user] != undefined)
@@ -35,7 +35,6 @@ function getUserNames (challenges, friends) {
     if  (friendsInfo[challenges.received[i].from_user] != undefined)
       challenges.received[i].from_user = friendsInfo[challenges.received[i].from_user].name;
   }
-
 }
 
 /*

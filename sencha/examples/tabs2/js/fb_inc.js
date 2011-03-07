@@ -1,7 +1,7 @@
 
   function fbLoadUserInfo (callback) {
 
-    if (CEL.USER_INFO.user_id == undefined) {
+    if (CEL.USER_INFO.user_id == undefined || CEL.USER_INFO.user_id == "") {
       FB.api ('/me', function (user) {
         Ext.Ajax.request ({
           url: AJAX_DIR + "addUser.php",
@@ -19,7 +19,7 @@
         });
       }); 
     } else {
-       Ext.Ajax.request ({
+     Ext.Ajax.request ({
         url: AJAX_DIR + "getUser.php",
         params: { user_id: CEL.USER_INFO.user_id},
         method: 'POST',
@@ -35,7 +35,7 @@
 
   function fbLoadFriends (callback) {
     if (window.FRIENDS == undefined) {
-      FB.api ('/me/friends', function (friends) {
+      FB.api ('/me/friends?limit=200', function (friends) {
         window.FRIENDS = friends.data; 
         callback (friends.data);
       });
@@ -68,12 +68,12 @@
     if (response.session) {
       fbLoginEvent ();
     } else {
-      fbLogoutEvent ();
+      FB.login (EMPTY_FUNC);
     }
   }
 
   function fbLoginEvent () {
-    fbLoadUserInfo (EMPTY_FUNC );
+    fbLoadUserInfo (refresh);
   }
 
   function fbLogoutEvent () {

@@ -1,3 +1,9 @@
+function refresh () {
+  load_myinfo ();
+  load_mycel ();
+  load_friends ();
+}
+
 
 Ext.ns ('CEL', 'CEL.views', 'CEL.stores');
 CEL =  new Ext.Application({
@@ -9,16 +15,8 @@ CEL =  new Ext.Application({
 
   launch: function() {
 
-    var refresh = function () {
-        fbRequireLogin (function () {
-          load_friends ();
-          load_myinfo ();
-          load_mycel();
-        });
-      };
 
-
-      CEL.MyInfo = new Ext.Component({
+     CEL.MyInfo = new Ext.Component({
         title: 'My Info',
         cls: 'card1',
         iconCls :'info',
@@ -81,7 +79,6 @@ CEL =  new Ext.Application({
         iconCls :'favorites',
         scroll: 'vertical',
         id: "MyCel",
-        badgeText: 4,
         tpl: new Ext.XTemplate([
           '<tpl for="received">',
             '<div id="challenge-id-{challenge_id}" class="challenge received">',
@@ -94,13 +91,20 @@ CEL =  new Ext.Application({
           '<tpl for="sent">', 
             '<div id="challenge-id-{challenge_id}" class="challenge sent">',
               '<div class="to-user">{to_user}</div> has ',
-              '<div class="time-left">{num_days} Days Left</div> to ',
+              '<div class="time-left">{num_days} Days Left</div> to stop ',
               '<div class="challenge-text">{challenge}</div>',
               '<div class="stake">Stake: {stake}</div>',
             '</div>',
           '</tpl>'
         ])
       });
+
+
+
+
+
+    if (FB.getSession()) {
+
         TABPANEL = new Ext.TabPanel({
             tabBar: {
                 dock: 'top',
@@ -119,7 +123,34 @@ CEL =  new Ext.Application({
             },
             items: [CEL.MyInfo, CEL.MyCEL, CEL.Friends]
         });
-      refresh ();
-      //setInterval (refresh, 10000);
-    }
+        refresh ();
+    } else {
+
+      var FB_BUTTON = new Ext.Component ({
+        title: 'FB',
+        xtype: 'box',
+        el: 'fb-login-button',
+      });
+
+        TABPANEL = new Ext.TabPanel({
+            tabBar: {
+                dock: 'top',
+                layout: {
+                    pack: 'center'
+                }
+            },
+            fullscreen: true,
+            cardSwitchAnimation: {
+                type: 'slide',
+                cover: true
+            },
+            
+            defaults: {
+                scroll: 'vertical'
+            },
+            items: [FB_BUTTON]  
+        });
+
+      }
+    } // end launch 
 });
