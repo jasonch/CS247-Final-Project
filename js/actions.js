@@ -40,7 +40,7 @@ function changeContent (page) {
       fbRequireLogin(function () {
         fbLoadFriends (load_goals);
         load_myinfo ();
-        fbLoadFriends (load_mycel);
+        //fbLoadFriends (load_mycel);
       });
   }
 }
@@ -151,7 +151,7 @@ function boxOpen (open_id, open_url, parent_el) {
           systemMessage ("Request sent!");
           fbLoadUserInfo( function () {
             load_myinfo();
-            load_mycel ();
+            //load_mycel ();
           });
         } else 
           systemMessage ("An error occurred with your request.");

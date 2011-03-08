@@ -19,19 +19,20 @@ function format_mycel (challenges) {
   var pending = [];
   var active = [];
   
-  var finishResult;
-  for (int k = 0; k < challenges.recieved.length; k++) {
+ /* var finishResult;
+  for (var k = 0; k < challenges.recieved.length; k++) {
   var days_left = ((new Date (challenge.timestamp).getTime () + 259200 - (new Date ()).getTime())) / 259200;
     if (days_left < 0) { // Time expired - need to ask whether challenge has been completed
         finishResult += "<div class='challenge-item finish' id='challenge-id-" + challenges[k].challenge_id + "'>";
         finishResult += "Have you finished this challenge? :"; // Same window
         finishResult += challenges[k].challenge + ".<br/>" ;
-        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + ', 'true');"> Yes </button>';
-        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + '. 'false');"> No </button>';
+        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + ', "true");"> Yes </button>';
+        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + '. "false");"> No </button>';
         finishResult += '</div>';
     }
         
   }
+  */
   
   for (var i = 0; i < challenges.received.length; i++) {
     var challenge = challenges.received[i];
@@ -152,11 +153,11 @@ function busted (id) {
   });
 }
 
-function accomplished (id, bool) {
+/*function accomplished (id, bool) {
     $.ajax ({
         type: 'POST',
-        url: AJAX_DIR + 'accomplishChallenge.php'
-        data: 'challenge_id = '+ id ,
+        url: AJAX_DIR + 'accomplishChallenge.php',
+        data: 'challenge_id='+ id ,
         success: function (response) {
             if (response == "true") {
                 systemMessage ("ACCOMPLISHED!");
@@ -167,4 +168,5 @@ function accomplished (id, bool) {
         }
     });
 }
+*/
 
