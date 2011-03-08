@@ -38,7 +38,7 @@ function changeContent (page) {
       break;
     default:
       fbRequireLogin(function () {
-        fbLoadFriends (load_friends);
+        fbLoadFriends (load_goals);
         load_myinfo ();
         fbLoadFriends (load_mycel);
       });

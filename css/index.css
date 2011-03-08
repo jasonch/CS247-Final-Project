@@ -73,6 +73,10 @@ input[type=text] {
   height: 30px;
   padding: 0 5px;
 }
+.goal-num-following {
+  font-size: 14px;
+}
+
 
 #goal-participants-box {
   display: inline;
