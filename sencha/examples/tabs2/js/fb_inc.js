@@ -1,29 +1,33 @@
 
   function fbLoadUserInfo (callback) {
 
-    if (window.USER_INFO.user_id == undefined) {
+    if (CEL.USER_INFO.user_id == undefined || CEL.USER_INFO.user_id == "") {
       FB.api ('/me', function (user) {
-        $.ajax ({
-          type: "POST",
+        Ext.Ajax.request ({
           url: AJAX_DIR + "addUser.php",
-          data: "user_id=" + user.id + "&name=" +user.name, 
-          success: function(data) {
-            if (data != "false") {
-              window.USER_INFO = eval ('(' + data + ')');
-              callback();
+          params: {
+            user_id: user.id,
+            name: user.name
+          },
+          method: 'POST',
+          success: function (data) {
+            if (data.responseText != "false") {
+              CEL.USER_INFO = eval ('(' + data.responseText + ')');
+              callback(CEL.USER_INFO);
             }
           }
-       });
+        });
       }); 
     } else {
-       $.ajax ({
-        type: "POST",
+     Ext.Ajax.request ({
         url: AJAX_DIR + "getUser.php",
-        data: "user_id=" + window.USER_INFO.user_id,  
-        success: function(data) {
+        params: { user_id: CEL.USER_INFO.user_id},
+        method: 'POST',
+        success: function(xhr) {
+          var data = xhr.responseText;
           if (data != "false") 
-            window.USER_INFO = eval ('(' + data + ')');
-          callback();
+            CEL.USER_INFO = eval ('(' + data + ')');
+          callback(CEL.USER_INFO);
         }
       });
     }   
@@ -31,16 +35,16 @@
 
   function fbLoadFriends (callback) {
     if (window.FRIENDS == undefined) {
-      FB.api ('/me/friends', function (friends) {
-        window.FRIENDS = friendArrayToObject (friends.data);
-        callback ();
+      FB.api ('/me/friends?limit=200', function (friends) {
+        window.FRIENDS = friends.data; 
+        callback (friends.data);
       });
     } else 
-      callback ();
+      callback (window.FRIENDS);
   }
 
   function fbRequireLogin (callback) {
-    if (USER_INFO.id ==  undefined) {
+    if (CEL.USER_INFO.id ==  undefined) {
       FB.getLoginStatus (function (response) {
         // don't call FB.login if already logged in
         if (response.session) {
@@ -64,17 +68,16 @@
     if (response.session) {
       fbLoginEvent ();
     } else {
-      fbLogoutEvent ();
+      FB.login (EMPTY_FUNC);
     }
   }
 
   function fbLoginEvent () {
-    fbLoadUserInfo (
-      function () { changeContent ("my"); } );
+    fbLoadUserInfo (refresh);
   }
 
   function fbLogoutEvent () {
-    window.USER_INFO = {};
+    CEL.USER_INFO = {};
   }
 
   FB.init({ 

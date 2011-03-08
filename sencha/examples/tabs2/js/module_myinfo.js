@@ -1,5 +1,7 @@
 function load_myinfo () {
-    $('#block-my-info').html (formatUserInfo(window.USER_INFO));
+  fbLoadUserInfo (function (user) {
+    CEL.MyInfo.update (user); 
+  });
 }
 
 function formatUserInfo(user) {

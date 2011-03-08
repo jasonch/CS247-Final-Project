@@ -33,14 +33,11 @@ function startSearch () {
 function changeContent (page) {
   CUR_PAGE = page;
   switch (page) {
-    case "vis":
-      fbLoadFriends (load_visualization);
-      break;
     default:
       fbRequireLogin(function () {
-        fbLoadFriends (load_goals);
-        load_myinfo ();
-        fbLoadFriends (load_mycel);
+        //fbLoadFriends (load_friends);
+        //load_myinfo ();
+        //fbLoadFriends (load_mycel);
       });
   }
 }
@@ -75,56 +72,22 @@ function loadCurrentPage () {
   changeContent ("");
 }
 
-function selectFriendItem (friendId) {
-  if (jQuery.inArray(friendId, window.autocompleteArray) == -1) {
-    var name = window.FRIENDS[friendId].name;
-    $('#goal-participants-box').append ($("<div class='selected-friends'></div>")
-        .append ("<input type='text' value='"+name+"' size="+name.length+" disabled='true'/>")
-        .show ());
-    window.autocompleteArray.push (friendId);
-    $('#goal-recipients').val(window.autocompleteArray.join (','));
-  }
-}
-
-
-
-function friendFilter () {
-  var prefix = $('#goal-participants').val().toLowerCase();
-  
-  var result = "";
-  for (var f in window.FRIENDS) {
-    if (window.FRIENDS[f].name.toLowerCase().indexOf (
-      jQuery.trim (prefix)) == -1) continue;
-
-    result += "<div class='friend-item' onClick='selectFriendItem(" + window.FRIENDS[f].id + ")'>" + window.FRIENDS[f].name + "</div>";
-  }
-  return result;
-}
 
 function boxOpen (open_id, open_url, parent_el) {
   $.ajax ({
-    type: "GET",
+    type: "POST",
     url: AJAX_DIR + open_url,
-    data: "user_id="+ window.USER_INFO.user_id, 
     success: function (text) {
       $('#' + open_id).remove ();
       $("#"+ parent_el).append( $("<div id='"+ open_id + "' class='lightbox' ></div>")
       .append (text)
       .show ());
       $('.lightbox').bind ('click', function (event) {
-        $('.autocomplete').remove ();
         event.stopPropagation ();
       });
     }
    });
-  }
-
-  function autocomplete (id, filter, parent_id) {
-    $('#' + id).remove ();
-    $('#' + parent_id).append ($("<div id='" + id + "' class='autocomplete'></div>")
-      .append (filter())
-      .show ());
-  }
+}
 
 
   function validateChallenge () {

@@ -1,37 +1,49 @@
 function load_mycel () {
-  $.ajax ({
-    type: "POST",
-    url: AJAX_DIR + "getUserChallenges.php",
-    data: "user_id=" + USER_INFO.user_id,
-    success: function (data) {
+  fbLoadFriends (function (friends) {
+    Ext.Ajax.request ({
+      method: "POST",
+      url: AJAX_DIR + "getUserChallenges.php",
+      params: { user_id: CEL.USER_INFO.user_id },
+      success: function (xhr) {
+       var data = xhr.responseText;
        var challenges = eval ('(' + data + ')');
-        //$('#block-my-cel').html (data);
-        if (challenges != undefined)
-         	$('#block-my-cel').html (format_mycel (challenges));
-    }
+        if (challenges != undefined) {
+          getUserNames (challenges, friends);
+          CEL.MyCEL.update (challenges);
+        }
+      }
+    });
   });
 }
 
+
+function friendArrayToObject (friends) {
+  var Obj = {};
+  for (var i = 0; i < friends.length; i++) {
+    Obj[friends[i].id] = friends[i];
+  }
+  return Obj;
+}
+
+function getUserNames (challenges, friends) {
+  var friendsInfo = friendArrayToObject (friends);
+  for (var i = 0; i < challenges.sent.length; i++) {
+    if  (friendsInfo[challenges.sent[i].to_user] != undefined)
+      challenges.sent[i].to_user = friendsInfo[challenges.sent[i].to_user].name;
+  }
+  for (var i = 0; i < challenges.received.length; i++) {
+    if  (friendsInfo[challenges.received[i].from_user] != undefined)
+      challenges.received[i].from_user = friendsInfo[challenges.received[i].from_user].name;
+  }
+}
+
+/*
 function format_mycel (challenges) {
   window.MY_CHALLENGES = challenges; // set global variable for future reference
   var result = "";
   var list = "<div class'title'> My Challenge List </div>";
   var pending = [];
   var active = [];
-  
-  var finishResult;
-  for (int k = 0; k < challenges.recieved.length; k++) {
-  var days_left = ((new Date (challenge.timestamp).getTime () + 259200 - (new Date ()).getTime())) / 259200;
-    if (days_left < 0) { // Time expired - need to ask whether challenge has been completed
-        finishResult += "<div class='challenge-item finish' id='challenge-id-" + challenges[k].challenge_id + "'>";
-        finishResult += "Have you finished this challenge? :"; // Same window
-        finishResult += challenges[k].challenge + ".<br/>" ;
-        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + ', 'true');"> Yes </button>';
-        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + '. 'false');"> No </button>';
-        finishResult += '</div>';
-    }
-        
-  }
   
   for (var i = 0; i < challenges.received.length; i++) {
     var challenge = challenges.received[i];
@@ -42,12 +54,8 @@ function format_mycel (challenges) {
       case "1":
         active.push(challenge);
         break;
-
   	} 
   }
-  
-  
-  
 
   result += "<div class='title'>Challenges For Me</div>";
   for (var j = 0; j < pending.length; j++) {
@@ -151,20 +159,4 @@ function busted (id) {
 
   });
 }
-
-function accomplished (id, bool) {
-    $.ajax ({
-        type: 'POST',
-        url: AJAX_DIR + 'accomplishChallenge.php'
-        data: 'challenge_id = '+ id ,
-        success: function (response) {
-            if (response == "true") {
-                systemMessage ("ACCOMPLISHED!");
-                $fbLoadUSerInfo (load_myinfo);
-            } else {
-                systemMessage ("An error occured");
-            }
-        }
-    });
-}
-
+*/

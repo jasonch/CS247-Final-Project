@@ -1,0 +1,56 @@
+body {
+	font-family: arial, "arial black";
+}
+
+input[type=text] {
+  color: gray;
+}
+.friend-item {
+}
+
+.friend-pic {
+  float:left;
+}
+.friend-name {
+  padding: 10px;
+}
+.user-pic {
+  float: left;
+  padding: 5px;
+}
+
+.challenge {
+  border-bottom: 1px #555555 dotted;
+  padding: 5px;
+}
+.challenge .to-user, .challenge .from-user {
+  display: inline;
+  font-weight: bold;
+}
+.challenge .time-left {
+  display: inline;
+}
+.challenge .challenge-text {
+  display: inline;
+  font-style: italic;
+}
+.received {
+  background: rgb(240,240,255);
+}
+
+.received .stake {
+  display: inline;
+}
+
+.sent {
+  background: rgb(255,240,240);
+}
+
+#fb-longin-button {
+  float: right;
+}
+
+.facebook {
+  background: url('../images/facebook-icon.png');
+
+}
