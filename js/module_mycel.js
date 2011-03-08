@@ -19,6 +19,20 @@ function format_mycel (challenges) {
   var pending = [];
   var active = [];
   
+  var finishResult;
+  for (int k = 0; k < challenges.recieved.length; k++) {
+  var days_left = ((new Date (challenge.timestamp).getTime () + 259200 - (new Date ()).getTime())) / 259200;
+    if (days_left < 0) { // Time expired - need to ask whether challenge has been completed
+        finishResult += "<div class='challenge-item finish' id='challenge-id-" + challenges[k].challenge_id + "'>";
+        finishResult += "Have you finished this challenge? :" + window._____[challenges[k].from_User]; // Same window
+        finishResult += challenges[k].challenge + ".<br/>" ;
+        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + ', 'true');"> Yes </button>';
+        finishResult += '<button type="button" onclick="accomplished (' + challenges[k].challenge_id + '. 'false');"> No </button>';
+        finishResult += '</div>';
+    }
+        
+  }
+  
   for (var i = 0; i < challenges.received.length; i++) {
 <<<<<<< HEAD:js/module_mycel.js
   	if (challenges.received[i].status == 0) { // The challenge is pending...
@@ -36,6 +50,9 @@ function format_mycel (challenges) {
 >>>>>>> 1ff461a434f65e687a69b2c196b73ca59611fa04:js/module_mycel.js
   	} 
   }
+  
+  
+  
 
   result += "<div class='title'>Challenges For Me</div>";
   for (var j = 0; j < pending.length; j++) {
@@ -138,5 +155,21 @@ function busted (id) {
     }
 
   });
+}
+
+function accomplished (id, bool) {
+    $.ajax ({
+        type: 'POST',
+        url: AJAX_DIR + 'accomplishChallenge.php'
+        data: 'user_id = ' window.USER_INFO.user_id + '&challenge_id=' + id,
+        success: function (response) {
+            if (response == "true") {
+                systemMessage ("ACCOMPLISHED!");
+                $fbLoadUSerInfo (load_myinfo);
+            } else {
+                systemMessage ("An error occured");
+            }
+        }
+    });
 }
 
