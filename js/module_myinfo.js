@@ -11,8 +11,6 @@ function formatUserInfo(user) {
   } else {
     result += "<div class='user_status'><input id='user-status-box' type='text' value='" + user.message + "' onChange='updateStatus(this);' ></input></div>";
   }
-  result += "<div class='user_pts'>" + user.points + " Points</div>";
-
   result += "</div>";
   return result;
 }
