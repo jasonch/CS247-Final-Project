@@ -127,7 +127,7 @@ CEL =  new Ext.Application({
     } else {
 
       var FB_BUTTON = new Ext.Component ({
-        title: 'FB',
+        title: 'Facebook',
         xtype: 'box',
         el: 'fb-login-button',
       });

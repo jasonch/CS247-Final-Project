@@ -23,6 +23,11 @@
       $('html').bind ('click', function () {
         if ($('.lightbox').length != 0) {
           $('.lightbox').remove ();
+          window.autocompleteArray = [];
+        }
+        if ($('.autocomplete').length != 0) {
+          $('.autocomplete').remove ();
+          window.autocompleteArray = [];
         }
       });
       
@@ -39,19 +44,22 @@
       <a href='#'><img src='images/cel_logo.png' width='220px'/></a>
     </div>
     <div class='nav_links'>
-      <fb:login-button autologoutlink='true' size='medium'></fb:login-button>   
+      <a href='#'>Home</a>
+      <a href='#vis' onclick='changeContent("vis");'>Statistics</a>
+      <fb:login-button autologoutlink='true' size='medium'></fb:login-button>
     </div>
   </div><!-- end header -->
 
   <div class='wrapper'>
     <div id='system-message'></div>
     <div class='left-side'>
-      <div id='block-friends'>
-        <div class='friends-search'>
-          <input type='text' id='friends-search-box' value='search...' onClick='clearText(this); startSearch();'></input>
+      <div id='block-goals'>
+        <div class='goal-item' id='goal-setup-new' onClick='boxOpen("goal-setup-box", "setup_goal.php", "goal-setup-new");' >Set New Goal...</div>
+        <div class='goal-search'>
+          <input type='text' id='goal-search-box' value='search...' onClick='clearText(this); startSearch();'/>
         </div><!-- end friends-search -->
-        <div id='friends-list'></div>
-      </div><!-- end block-friends -->
+        <div id='goal-list'></div>
+      </div><!-- end block-goals -->
     </div><!-- end left-side -->
 
     <div class='right-side'>

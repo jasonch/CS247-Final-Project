@@ -59,19 +59,23 @@ input[type=text] {
   float: left;
 }
 
-#block-friends {
+#block-goals {
   width: 250px;
   min-height: 500px;
   margin: 20px;
   border: 1px solid #000;
 }
-.friends-search {
+.goal-search {
   padding: 5px;
 }
 
-.friend-item {
-  height: 70px;
+.goal-item {
+  height: 30px;
   padding: 0 5px;
+}
+
+#goal-participants-box {
+  display: inline;
 }
 .focused {
   background: #CCFFCC;
@@ -85,10 +89,19 @@ input[type=text] {
   background: white;
   border: 5px solid black;
   width: 400px;
-  height: 200px;
   left: 200px;
   z-index: 10;
   padding: 10px;
+}
+
+.autocomplete {
+  position: relative;
+  background: white;
+  border: 1px solid black;
+  z-index: 20;
+}
+.selected-friends {
+  display: inline;
 }
 
 #block-my-info {
