@@ -5,6 +5,7 @@
 	if (empty ($_POST['from_user']) || empty ($_POST['to_user']) ||
 	   empty ($_POST['goal']) || empty ($_POST['num_days'])) {
 	   echo json_encode(FALSE);
+     echo "Invalid parameters";
 	   exit();
 	}
 
@@ -13,7 +14,7 @@
 	$aGoal = $_POST['goal'];
 	$aNumDays = $_POST['num_days'];
 
-	$insertGoalQuery = "INSERT INTO goals ('goal', 'numDays') VALUES  ('".$aGoal."','".$aNumDays."')";
+	$insertGoalQuery = "INSERT INTO goals ('goal', 'num_days') VALUES  ('".$aGoal."','".$aNumDays."')";
 	$getGoalIdQuery = "SELECT goal_id FROM goals ORDER BY time_created LIMIT 1";
 	$getPoolIdQuery = "SELECT goal_id FROM pools ORDER BY time_created LIMIT 1";
 
@@ -28,9 +29,11 @@
     	$insertParticipantsQuery = "INSERT INTO participants ('pool_id', 'user_id') VALUES ('".$poolId."', '".$aFromUser."');
     							    INSERT INTO participants ('pool_id', 'user_id') VALUES ('".$poolId."', '".$aToUser."')";
  		$countThree = $db->exec($insertParticipantQuery);
- 		if ($countOne != 1 || countTwo != 1 || $countThree != 2) {
+ 		if ($countOne != 1 || $countTwo != 1 || $countThree != 2) {
  			$db->rollback();
  			echo json_encode(FALSE);
+      echo "Insert failed. Rolling back.";
+	   exit();
  		} else {
  			echo json_encode(TRUE);	
  		}

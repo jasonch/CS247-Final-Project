@@ -72,7 +72,8 @@ function load_goals () {
 
 function formatGoals (goal) {
   var result = "<div class='goal-item' id='goal-item-" + goal.goal_id + "'>" +
-  goal.goal + "<div class='goal-num-following'>" + goal.num_following + " participating</div></div>";
+  goal.goal + "<div class='goal-num-following'>" + goal.num_following + " participating</div>" + 
+  "<div class='goal-link'><a>join</a> <a>start</a></div></div>";
   return result;
 }
 
