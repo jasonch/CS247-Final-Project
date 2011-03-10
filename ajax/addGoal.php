@@ -2,13 +2,13 @@
 
 	include ('./connect.php');
 
-	if (empty ($_POST['from_user']) || empty ($_POST['to_user']) ||
-	   empty ($_POST['goal']) || empty ($_POST['num_days'])) {
-	   echo json_encode(FALSE);
-	   exit();
+	if (empty ($_POST['users']) || empty ($_POST['goal']) 
+		|| empty ($_POST['num_days'])) {
+	   	echo json_encode(FALSE);
+	   	exit();
 	}
 
-	$aFromUser = $_POST['from_user'];
+	$user = $_POST['from_user'];
 	$aToUser = $_POST['to_user'];
 	$aGoal = $_POST['goal'];
 	$aNumDays = $_POST['num_days'];
