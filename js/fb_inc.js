@@ -8,7 +8,7 @@
           url: AJAX_DIR + "addUser.php",
           data: "user_id=" + user.id + "&name=" +user.name, 
           success: function(data) {
-            if (data != "false") {
+            if (data.toLowerCase () != "false") {
               window.USER_INFO = eval ('(' + data + ')');
               callback();
             }

@@ -17,7 +17,7 @@
 		foreach($exist as $row) {
     		echo json_encode ((object)$row);
 	  		exit();
-	  	}
+  	}
 	
 		$count = $db->exec($insertQuery);
     	if ($count == 0) {
@@ -34,6 +34,7 @@
 		echo "FALSE";
 	} catch (PDOException $e) {
     echo "FALSE";
+    echo $e;
 	}
 	
 ?>
