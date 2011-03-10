@@ -1,7 +1,49 @@
 <?php
 
-    include ('./connect.php');
+  $dummy = array();
+    $goal = new stdClass;
+    $goal->goal_id = "1";
+    $goal->goal = "Going to the gym";
+    $goal->num_days = "7";
+    $goal->num_following = "3";
+    $goal->status = "1";
+  $dummy[] = $goal;
+    $goal = new stdClass;
+    $goal->goal_id = "2";
+    $goal->goal = "Quit TV";
+    $goal->num_days = "4";
+    $goal->num_following = "2";
+    $goal->participants = json_encode (array("Sean", "Darius"));
+    $goal->status = "0";
+  $dummy[] = $goal;
+    $goal = new stdClass;
+    $goal->goal_id = "3";
+    $goal->goal = "Going to class on time";
+    $goal->num_days = "7";
+    $goal->num_following = "10";
+    $goal->participants = json_encode (array("Jeff", "Sep", "Sean"));
+    $goal->status = "0";
+  $dummy[] = $goal;
+    $goal = new stdClass;
+    $goal->goal_id = "4";
+    $goal->goal = "quit caffeine";
+    $goal->num_days = "3";
+    $goal->num_following = "3";
+    $goal->status = "1";
+  $dummy[] = $goal;
+
+
+
+  echo json_encode ($dummy);
+  exit ();
+
+
+
     
+
+
+    include ('./connect.php');
+
     if (empty ($_POST['user_id'])) {
 	   echo json_encode(-1);
 	   exit();

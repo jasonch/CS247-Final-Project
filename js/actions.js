@@ -40,7 +40,7 @@ function changeContent (page) {
       fbRequireLogin(function () {
         fbLoadFriends (load_goals);
         load_myinfo ();
-        //fbLoadFriends (load_mycel);
+        fbLoadFriends (load_mycel);
       });
   }
 }
@@ -159,6 +159,41 @@ function boxOpen (open_id, open_url, parent_el) {
     });
     return true;  
   }
+
+function setupGoal () {
+  // remove no matter what in case people keep clicking
+  $(".lightbox").remove ();
+
+  var goal_id = $('#pool-id').val(); 
+  var user_id = $('input:[type="hidden"][name="sender"]').val ();
+  var recipients = $('input:[type="hidden"][name="recipients"]').val ();
+  if (goal_id != undefined && goal_id != "") {
+    
+    $.ajax ({
+      type: "POST",
+      url: AJAX_DIR + "addPool.php",
+      data: "from_user=" + user_id + "&to_user=" + recipients + "&goal_id=" + goal_id,
+      success: function (data) {
+        if (data.toLowerCase () != "false") {
+          systemMessage ("Your goal is set up! Good Luck!");
+        }
+      }
+    });
+  } else {
+    var goal_text = $('input:[type="text"][name="goal-text"]').val ();
+    var days = $('input:[type="text"][name="goal-days"]').val ();
+    $.ajax ({
+      type: "POST",
+      url: AJAX_DIR + "addGoal.php",
+      data: "from_user=" + user_id + "&to_user=" + recipients + "&goal=" + goal_text + "&num_days=" + days,
+      success: function (data) {
+        if (data.toLowerCase () != "false") {
+          systemMessage ("Your goal is set up! Good Luck!");
+        } 
+      }
+    });
+  }
+}
 
 
 function clearLightbox () {
