@@ -155,6 +155,17 @@ input[type=text] {
 .my-goal-links a:hover {
   text-decoration: underline;
 }
+.top-friend-item {
+  padding: 5px;
+}
+.top-friend-name {
+  display: inline;
+  font-weight: bold;
+}
+.top-friend-num {
+  display: inline;
+  padding: 10px;
+}
 
 #vis-table {
   border-collapse: collapse;
