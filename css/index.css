@@ -70,13 +70,20 @@ input[type=text] {
 }
 
 .goal-item {
-  height: 30px;
-  padding: 0 5px;
+  padding: 0 5px 10px 5px;
 }
-.goal-num-following {
+.goal-item .goal-num-following {
+  display: inline;
   font-size: 14px;
+  padding: 0px 2px;
 }
-
+.goal-item .goal-link {
+  display: inline;
+}
+.goal-item .goal-link a {
+  font-size: 16px;
+  padding: 0px 2px;
+}
 
 #goal-participants-box {
   display: inline;
@@ -111,7 +118,7 @@ input[type=text] {
 #block-my-info {
   margin: 20px;
   width: 600px;
-  min-height: 220px;
+  min-height: 120px;
   border: 1px solid #000;
 }
 
@@ -120,13 +127,58 @@ input[type=text] {
   padding: 5px;
 }
 
-#block-my-cel {
+#block-content {
   margin: 20px;
   width: 600px;
   min-height: 120px;
   border: 1px solid #000;
   font-size: 14px;
 }
-#block-my-cel .title {
+#block-content .title {
   font-size: 20px;
+  padding: 10px 5px;
+  text-align: center;
 }
+
+.my-goal-item {
+  padding: 5px;
+}
+
+.my-goal-text {
+  font-weight: bold;
+}
+.my-goal-links a{
+  padding: 0px 5px;
+  text-decoration: none;
+  color: #3399cc;
+}
+.my-goal-links a:hover {
+  text-decoration: underline;
+}
+
+#vis-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#vis-table td {
+  border-bottom: 1px blue dotted;
+  padding: 0 10px;
+}
+#vis-table th {
+  border-bottom: 1px blue dotted;
+  padding: 0 10px;
+  text-align: left;
+}
+#vis-table th.result {
+  text-align: center;
+}
+
+.succeed {
+  background: url('../images/succeed.png');
+  width: 40px;
+  height: 40px;
+}
+.failed {
+  background: url('../images/failed.png');
+  width: 40px;
+  height: 40px;

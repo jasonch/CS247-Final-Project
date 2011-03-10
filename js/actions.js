@@ -40,7 +40,7 @@ function changeContent (page) {
       fbRequireLogin(function () {
         fbLoadFriends (load_goals);
         load_myinfo ();
-        //fbLoadFriends (load_mycel);
+        fbLoadFriends (load_mycel);
       });
   }
 }

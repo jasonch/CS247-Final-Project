@@ -14,6 +14,7 @@
 <script type='text/javascript' src='js/module_friends.js'></script>
 <script type='text/javascript' src='js/module_myinfo.js'></script>
 <script type='text/javascript' src='js/module_mycel.js'></script>
+<script type='text/javascript' src='js/visualization.js'></script>
 
 <script type='text/javascript'> 
   $('document').ready(
@@ -45,7 +46,7 @@
       <a href='#'><img src='images/cel_logo.png' width='220px'/></a>
     </div>
     <div class='nav_links'>
-      <a href='#'>Home</a>
+      <a href='#' onclick='changeContent("");'>Home</a>
       <a href='#vis' onclick='changeContent("vis");'>Statistics</a>
       <fb:login-button autologoutlink='true' size='medium'></fb:login-button>
     </div>
@@ -55,7 +56,7 @@
     <div id='system-message'></div>
     <div class='left-side'>
       <div id='block-goals'>
-        <div class='goal-item' id='goal-setup-new' onClick='boxOpen("goal-setup-box", "setup_goal.php", "goal-setup-new");' >Set New Goal...</div>
+        <div class='goal-item' id='goal-setup-new' onClick='boxOpen("goal-setup-box", "setup_goal.php", "goal-setup-new");' >Set New C&Eacute;L...</div>
         <div class='goal-search'>
           <input type='text' id='goal-search-box' value='search...' onClick='clearText(this); startSearch();'/>
         </div><!-- end goal-search -->
@@ -65,8 +66,9 @@
 
     <div class='right-side'>
       <div id='block-my-info'>&nbsp;</div>
-      <div id='block-my-cel'>&nbsp;</div>
-      <div id='block-vis'>&nbsp;</div>
+      <div id='block-content'>
+
+      </div>
     </div><!-- end right-side -->
   </div><!-- end wrapper -->
 </body>
