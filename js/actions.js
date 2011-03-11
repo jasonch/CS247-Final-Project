@@ -4,9 +4,9 @@ function getArgs () {
   var hashes = window.location.href.slice(window.location.href.indexOf('#') + 1).split('/');
     for(var i = 0; i < hashes.length; i++)
     {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
+        //hash = hashes[i].split('=');
+        vars.push(hashes[i]);
+        //vars[hash[0]] = hash[1];
     }
     return vars;
 }
@@ -34,6 +34,8 @@ function changeContent (page) {
   CUR_PAGE = page;
   switch (page) {
     case "vis":
+      fbLoadFriends (load_goals);
+      load_myinfo ();
       fbLoadFriends (load_visualization);
       break;
     default:
@@ -64,15 +66,12 @@ function updateStatus (el) {
 }
 
 function loadCurrentPage () {
-/*
-  var params = getArgs ();
-  if (params["loc"] == undefined)
-    params["loc"] == "";
 
-  if (params["loc"] != CUR_PAGE)
-    changeContent (params["loc"]);
-*/
-  changeContent ("");
+  var params = getArgs ();
+  if (params[0] == undefined)
+    params[0] == "";
+
+  changeContent (params[0]);
 }
 
 function selectFriendItem (friendId) {
@@ -195,6 +194,11 @@ function setupGoal () {
   }
 }
 
+function joinGoal () {
+  $(".lightbox").remove ();
+  var pool_id = $('#pool_id').val ();
+  $("#goal-join-" + pool_id).html ("leave");
+}
 
 function clearLightbox () {
   if ($('.lightbox').length != 0) {

@@ -23,6 +23,10 @@ body {
   font-size: 2em;
   border: 0px;
 }
+.logo img {
+  border: 0px;
+}
+
 input[type=text] {
   color: gray;
 }
@@ -63,7 +67,8 @@ input[type=text] {
   width: 250px;
   min-height: 500px;
   margin: 20px;
-  border: 1px solid #000;
+  //border-right: 1px solid black;
+  //border: 1px solid #000;
 }
 .goal-search {
   padding: 5px;
@@ -81,15 +86,20 @@ input[type=text] {
   display: inline;
 }
 .goal-item .goal-link a {
+  color: #3399cc;
   font-size: 16px;
   padding: 0px 2px;
+  text-decoration: none;
+}
+.goal-item .goal-link a:hover {
+  text-decoration: underline;
 }
 
 #goal-participants-box {
   display: inline;
 }
 .focused {
-  background: #CCFFCC;
+  background: #DDFFEE;
 }
 .friend-name {
 
@@ -119,7 +129,8 @@ input[type=text] {
   margin: 20px;
   width: 600px;
   min-height: 120px;
-  border: 1px solid #000;
+  border-bottom: 1px solid black;
+  //border: 1px solid #000;
 }
 
 .user_pic {
@@ -131,7 +142,7 @@ input[type=text] {
   margin: 20px;
   width: 600px;
   min-height: 120px;
-  border: 1px solid #000;
+  //border: 1px solid #000;
   font-size: 14px;
 }
 #block-content .title {
@@ -180,8 +191,8 @@ input[type=text] {
   padding: 0 10px;
   text-align: left;
 }
-#vis-table th.result {
-  text-align: center;
+#vis-table th:hover {
+  text-decoration: underline;
 }
 
 .succeed {

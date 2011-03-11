@@ -9,8 +9,7 @@ function getUser ($user_id) {
 			$user = new stdClass;
 			$user->user_id = $row['user_id'];
 			$user->name = $row['name'];
-			$user->points = $row['points'];
-			$user->message = $row['message'];
+			$user->status = $row['status'];
       return $user;
 	}
     return FALSE; 

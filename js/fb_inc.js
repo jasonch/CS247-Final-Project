@@ -70,7 +70,7 @@
 
   function fbLoginEvent () {
     fbLoadUserInfo (
-      function () { changeContent ("my"); } );
+      function () { loadCurrentPage (); } );
   }
 
   function fbLogoutEvent () {

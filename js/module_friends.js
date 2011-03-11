@@ -73,7 +73,7 @@ function load_goals () {
 function formatGoals (goal) {
   var result = "<div class='goal-item' id='goal-item-" + goal.goal_id + "'>" +
   goal.goal + "<div><div class='goal-num-following'>" + goal.num_following + " participating</div>" + 
-  "<div class='goal-link'><a href='#'>join</a> <a href='#' id='goal-start-" + goal.goal_id + "'>start</a></div></div></div>";
+  "<div class='goal-link'><a href='#' id='goal-join-" + goal.goal_id + "'>join</a> <a href='#' id='goal-start-" + goal.goal_id + "'>start</a></div></div></div>";
   return result;
 }
 
@@ -95,6 +95,12 @@ function updateGoalBlock (goals, nameFilter) {
       $('#goal-start-' + id).bind ('click', {gid:id, goal_text: goal}, function (event) {
         boxOpen ("goal-setup-box",
           "setup_goal.php?goal_id="+event.data.gid+"&user_id="+window.USER_INFO.user_id , "goal-item-"+ event.data.gid);
+      });
+
+      $('#goal-join-' + id).bind ('click', {gid:id, goal_text: goal}, function (event) {
+        //boxOpen ("goal-setup-box",
+        //  "join_goal.php?goal_id="+event.data.gid+"&user_id="+window.USER_INFO.user_id , "goal-item-"+ event.data.gid);
+        this.innerHTML = "participating";
       });
       count++;
       if (count > 20) break;

@@ -33,7 +33,9 @@
           window.autocompleteArray = [];
         }
       });
-      
+      $('.goal-item').bind ('mouseenter mouseleave', function () {
+        $(this).toggleClass ('focused');
+      });
     });
 </script>
 </head>
@@ -47,9 +49,9 @@
       <a href='#'><img src='images/cel_logo.png' width='220px'/></a>
     </div>
     <div class='nav_links'>
+      <fb:login-button autologoutlink='true' size='medium'></fb:login-button>
       <a href='#' onclick='changeContent("");'>Home</a>
       <a href='#vis' onclick='changeContent("vis");'>Statistics</a>
-      <fb:login-button autologoutlink='true' size='medium'></fb:login-button>
     </div>
   </div><!-- end header -->
 
@@ -57,10 +59,10 @@
     <div id='system-message'></div>
     <div class='left-side'>
       <div id='block-goals'>
-        <div class='goal-item' id='goal-setup-new' onClick='boxOpen("goal-setup-box", "setup_goal.php", "goal-setup-new");' >Set New C&Eacute;L...</div>
         <div class='goal-search'>
           <input type='text' id='goal-search-box' value='search...' onClick='clearText(this); startSearch();'/>
         </div><!-- end goal-search -->
+        <div class='goal-item' id='goal-setup-new' onClick='boxOpen("goal-setup-box", "setup_goal.php", "goal-setup-new");' >Setup New C&Eacute;L...</div>
         <div id='goal-list'></div>
       </div><!-- end block-goals -->
     </div><!-- end left-side -->
