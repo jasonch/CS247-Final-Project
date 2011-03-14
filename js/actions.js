@@ -200,6 +200,14 @@ function joinGoal () {
   $("#goal-join-" + pool_id).html ("leave");
 }
 
+function finishGoal (id, parent_el) {
+  boxOpen ("finish-goal-box", "finishGoalBox.php?goal_id="+ id, parent_el);
+}
+
+function reportProgress(id, parent_el) {
+  boxOpen ("report-progress-box", "reportProgress.php?goal_id="+ id, parent_el);
+}
+
 function clearLightbox () {
   if ($('.lightbox').length != 0) {
     $('.lightbox').remove ();

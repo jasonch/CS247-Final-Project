@@ -60,7 +60,7 @@ function formatPendingGoal (goal) {
 function formatActiveGoal (goal) {
   return "<div class='my-goal-item active'>" + 
     goal.num_days + " days left to <span class='my-goal-text'>" + goal.goal + 
-    '</span><span class="my-goal-links"><a href="#" onClick="boxOpen(\'report-progress\', \'reportProgress.php\', \'my-goal-item-\');">report progress</a><a href="#">finished</a></span>' + 
+    '</span><span class="my-goal-links"><a href="#" id="my-goal-' + goal.goal_id+ '-report" onClick="reportProgress('+goal.goal_id+', this.id);">report progress</a><a href="#" id="my-goal-' + goal.goal_id + '-finish" onclick="finishGoal('+ goal.goal_id+', this.id);">finished</a></span>' + 
     "</div>";
 }
 

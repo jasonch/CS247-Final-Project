@@ -1,109 +1,84 @@
 function load_mycel () {
-  fbLoadFriends (function (friends) {
-    Ext.Ajax.request ({
-      method: "POST",
-      url: AJAX_DIR + "getUserChallenges.php",
-      params: { user_id: CEL.USER_INFO.user_id },
-      success: function (xhr) {
-       var data = xhr.responseText;
-       var challenges = eval ('(' + data + ')');
-        if (challenges != undefined) {
-          getUserNames (challenges, friends);
-          CEL.MyCEL.update (challenges);
-        }
-      }
-    });
+  $('#block-content').html ("");
+  $.ajax ({
+    type: "POST",
+    url: AJAX_DIR + "getUserGoals.php",
+    data: "user_id=" + CEL.USER_INFO.user_id,
+    success: function (data) {
+       var goals = eval ('(' + data + ')');
+        if (goals != undefined)
+         	CEL.MyCEL.update (prepareGoals(goals));
+    }
   });
 }
 
+function prepareGoals (goals) {
+  window.MY_GOALS = goals;
+  for (var i = 0; i < goals.length; i++) {
+    if (goals[i].status == 0)
+      goals[i].type = 'pending';
+    else
+      goals[i].type = 'active';
 
-function friendArrayToObject (friends) {
-  var Obj = {};
-  for (var i = 0; i < friends.length; i++) {
-    Obj[friends[i].id] = friends[i];
-  }
-  return Obj;
+    if (goals[i].participants != undefined) {
+      var party = eval ('('+ goals[i].participants + ')');
+      if (party.length != 0)
+        goals[i].participants_str = "with " + party.join(', ');
+    }
+ }
+ return goals;
 }
 
-function getUserNames (challenges, friends) {
-  var friendsInfo = friendArrayToObject (friends);
-  for (var i = 0; i < challenges.sent.length; i++) {
-    if  (friendsInfo[challenges.sent[i].to_user] != undefined)
-      challenges.sent[i].to_user = friendsInfo[challenges.sent[i].to_user].name;
-  }
-  for (var i = 0; i < challenges.received.length; i++) {
-    if  (friendsInfo[challenges.received[i].from_user] != undefined)
-      challenges.received[i].from_user = friendsInfo[challenges.received[i].from_user].name;
-  }
-}
-
-/*
-function format_mycel (challenges) {
-  window.MY_CHALLENGES = challenges; // set global variable for future reference
-  var result = "";
-  var list = "<div class'title'> My Challenge List </div>";
+function format_mycel (goals) {
+  window.MY_GOALS = goals;
   var pending = [];
   var active = [];
-  
-  for (var i = 0; i < challenges.received.length; i++) {
-    var challenge = challenges.received[i];
-  	switch (challenge.status ) {
-      case "0":
-    		pending.push(challenge);
-        break;
-      case "1":
-        active.push(challenge);
-        break;
-  	} 
+  var ended = [];
+
+
+  for (var k = 0; k < goals.length; k++) {
+    if (goals[k].status == 0)
+      pending.push (goals[k]);
+    else
+      active.push (goals[k]);
   }
 
-  result += "<div class='title'>Challenges For Me</div>";
-  for (var j = 0; j < pending.length; j++) {
-    var pendingChallenge = pending[j];
-    result += "<div class='challenge-item pending' id='challenge-id-" + pendingChallenge.challenge_id + "'>";
-    result += window.FRIENDS[pendingChallenge.from_user].name + " has challenged you to " ;
-    result += pendingChallenge.challenge + ".<br/>" ;
-    result += '<button type="button" onclick="acceptChallenge (' + pendingChallenge.challenge_id + ');"> Accept </button>';
-    result += '<button type="button" onclick="cancelChallenge (' + pendingChallenge.challenge_id + ');"> Decline </button>';
-    result += '</div>';
-  }
+  var result = "";
 
-  var sent_pending = [];
-  var sent_active = [];
-  for (var i = 0; i < challenges.sent.length; i++) {
-    var challenge = challenges.sent[i];
-    switch (challenge.status) {
-      case "0":
-        sent_pending.push (challenge);
-        break;
-      case "1":
-        sent_active.push (challenge);
-        break;
+  if (pending.length > 0) {
+    result += "<div class='title'>Pending Invites</div>";
+    for (var i = 0; i < pending.length; i++) {
+      result += formatPendingGoal(pending[i]);
     }
   }
-
-  result += "<div class='title'>Challenges I Sent</div>";
-  for (var i = 0; i < sent_pending.length; i++) {
-    var challenge = sent_pending[i];
-    result += "<div class='challenge-item pending' id='challenge-id-" + challenge.challenge_id + "'>";
-      result += window.FRIENDS[challenge.to_user].name + " has not accepted your challenge to stop " + challenge.challenge + " for $" + challenge.stake;
-    result += " <a onclick='cancelChallenge("+challenge.challenge_id+")' href='#'>Cancel</a>";
-    result += "</div>";
-  }
-
-  // 259200 = 24 * 60 * 60 * 3
-  for (var i = 0; i < sent_active.length; i++) {
-    var challenge = sent_active[i];
-    var days_left = ((new Date (challenge.timestamp).getTime () + 259200 - (new Date ()).getTime())) / 259200;
-    result += "<div class='challenge-item active' id='challenge-id-" + challenge.challenge_id + "'>";
-    result += window.FRIENDS[challenge.to_user].name + " has " + days_left + " left without " + challenge.challenge;
-    result += " <a onclick='busted("+challenge.challenge_id+")' href='#'>Busted!</a>";
-    result += "</div>";
+  if (active.length > 0) {
+    result += "<div class='title'>Active C&Eacute;L</div>";
+    for (var i = 0; i < active.length; i++) {
+      result += formatActiveGoal(active[i]);
+    }
   } 
 
   return result;
-  
- }
+}
+
+function formatPendingGoal (goal) {
+  var participants = eval ('(' + goal.participants + ')');
+  var friends = ""
+  if (participants != undefined)
+    friends = participants.join (", ");
+
+  return "<div class='my-goal-item pending'>" + 
+    "Work on <span class='my-goal-text'>" + goal.goal + "</span> for "+ goal.num_days + 
+    " days with " + friends + "<span class='my-goal-links'><a href='#'>Accept</a><a href='#'>Ignore</a>" + 
+    "</span></div>";
+}
+
+function formatActiveGoal (goal) {
+  return "<div class='my-goal-item active'>" + 
+    goal.num_days + " days left to <span class='my-goal-text'>" + goal.goal + 
+    '</span><span class="my-goal-links"><a href="#" onClick="boxOpen(\'report-progress\', \'reportProgress.php\', \'my-goal-item-\');">report progress</a><a href="#">finished</a></span>' + 
+    "</div>";
+}
 
 function acceptChallenge (id) {
   $.ajax ({
@@ -159,4 +134,21 @@ function busted (id) {
 
   });
 }
+
+/*function accomplished (id, bool) {
+    $.ajax ({
+        type: 'POST',
+        url: AJAX_DIR + 'accomplishChallenge.php',
+        data: 'challenge_id='+ id ,
+        success: function (response) {
+            if (response == "true") {
+                systemMessage ("ACCOMPLISHED!");
+                $fbLoadUSerInfo (load_myinfo);
+            } else {
+                systemMessage ("An error occured");
+            }
+        }
+    });
+}
 */
+

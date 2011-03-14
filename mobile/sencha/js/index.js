@@ -25,14 +25,13 @@ CEL =  new Ext.Application({
           '<tpl for=".">',
             '<div class="user-pic"><img src="http://graph.facebook.com/{user_id}/picture?type=normal" /></div>',
             '<div class="user-name">{name}</div>',
-            '<div class="user-status"><input type="text" id="user-status-box" value="{message}"/></div>',
-            '<div class="user-points">Points: {points}</div>',
+            '<div class="user-status"><input type="text" id="user-status-box" value="{status}" size="20" /></div>',
           '</tpl>'
         ]
       });
       CEL.Friends_detailPanel = new Ext.Panel ({
             id: 'detailpanel',
-            tpl: '<div class="user-name">{name}</div><div class="user-message">{message}</div><div class="user-points">Points: {points}</div>',
+            tpl: '<div class="user-name">{name}</div><div class="user-message">Status: {message}</div>',
             dockedItems: [
                 {
                     xtype: 'toolbar',
@@ -80,27 +79,14 @@ CEL =  new Ext.Application({
         scroll: 'vertical',
         id: "MyCel",
         tpl: new Ext.XTemplate([
-          '<tpl for="received">',
-            '<div id="challenge-id-{challenge_id}" class="challenge received">',
-              'You have <div class="time-left">{num_days} Days Left</div> to win ',
-              '<div class="stake">${stake}</div><br/>',
-              'Stop <div class="challenge-text">{challenge}</div><br/>',
-              'From: <div class="from-user">{from_user}</div>',
-            '</div>',
-          '</tpl>',
-          '<tpl for="sent">', 
-            '<div id="challenge-id-{challenge_id}" class="challenge sent">',
-              '<div class="to-user">{to_user}</div> has ',
-              '<div class="time-left">{num_days} Days Left</div> to stop ',
-              '<div class="challenge-text">{challenge}</div>',
-              '<div class="stake">Stake: {stake}</div>',
+          '<tpl for=".">',
+            '<div class="my-goal-item {type}">',
+              'Work on <span class="my-goal-text">{goal}</span> ',
+              'for {num_days} days <span class="participants">{participants_str}</span>',
             '</div>',
           '</tpl>'
         ])
       });
-
-
-
 
 
     if (FB.getSession()) {

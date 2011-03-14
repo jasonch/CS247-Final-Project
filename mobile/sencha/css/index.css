@@ -19,30 +19,24 @@ input[type=text] {
   padding: 5px;
 }
 
-.challenge {
+.my-goal-item {
   border-bottom: 1px #555555 dotted;
   padding: 5px;
 }
-.challenge .to-user, .challenge .from-user {
+.my-goal-item .participants { 
   display: inline;
   font-weight: bold;
 }
-.challenge .time-left {
-  display: inline;
-}
-.challenge .challenge-text {
+
+.my-goal-item .my-goal-text {
   display: inline;
   font-style: italic;
 }
-.received {
+.pending {
   background: rgb(240,240,255);
 }
 
-.received .stake {
-  display: inline;
-}
-
-.sent {
+.active {
   background: rgb(255,240,240);
 }
 
@@ -54,3 +48,4 @@ input[type=text] {
   background: url('../images/facebook-icon.png');
 
 }
+

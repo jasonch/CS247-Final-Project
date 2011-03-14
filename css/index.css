@@ -58,6 +58,7 @@ input[type=text] {
 
 .left-side {
   float: left;
+  border-right: 1px dotted black;
 }
 .right-side {
   float: left;
@@ -67,8 +68,6 @@ input[type=text] {
   width: 250px;
   min-height: 500px;
   margin: 20px;
-  //border-right: 1px solid black;
-  //border: 1px solid #000;
 }
 .goal-search {
   padding: 5px;
@@ -129,8 +128,7 @@ input[type=text] {
   margin: 20px;
   width: 600px;
   min-height: 120px;
-  border-bottom: 1px solid black;
-  //border: 1px solid #000;
+  border-bottom: 1px dotted black;
 }
 
 .user_pic {
